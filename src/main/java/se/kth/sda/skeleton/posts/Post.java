@@ -14,11 +14,21 @@ public class Post {
 
     private String body;
 
+    private String title;
+
     public Post() {
     }
 
     public Post(String body) {
         this.body = body;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public Long getId() {
