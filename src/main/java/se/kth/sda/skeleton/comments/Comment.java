@@ -4,15 +4,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonIdentityReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
-import se.kth.sda.skeleton.posts.Post;
 
 @Entity
 public class Comment {
@@ -21,16 +12,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    // @JoinColumn(nullable = false)
     private String body;
-
-    // @ManyToOne
-    // @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,
-    // property = "id")
-    // @JsonIdentityReference(alwaysAsId = true)
-    // @JoinColumn(nullable = false)
-    // @NotNull
-    // private Post post;
 
     public Comment() {
     }
