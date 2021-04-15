@@ -3,8 +3,8 @@ import React, { useEffect, useState } from "react";
 
 // Project files
 import PostsApi from "../../api/PostsApi";
-import Form from "./Form";
-import Card from "./Card";
+import PostCard from "../../components/post/PostCard";
+import NewPostForm from "../../components/post/NewPostForm";
 
 export default function PostsPage() {
   // Local state
@@ -41,15 +41,15 @@ export default function PostsPage() {
   }, [setPosts]);
 
   // Components
-  const CardsArray = posts.map((post) => (
-    <Card key={post.id} post={post} onDeleteClick={() => deletePost(post)} />
+  const PostsArray = posts.map((post) => (
+    <PostCard key={post.id} post={post} onDeleteClick={() => deletePost(post)} />
   ));
 
   return (
     <div>
-      <Form onSubmit={(postData) => createPost(postData)} />
+      <NewPostForm onSubmit={(postData) => createPost(postData)} />
 
-      {CardsArray}
+      {PostsArray}
     </div>
   );
 }

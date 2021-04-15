@@ -25,11 +25,11 @@ export default function Navbar({ onLogout }) {
         <span className="navbar-toggler-icon"></span>
       </button>
 
-      <div className="collapse navbar-collapse" id="navbarColor01">
-        <ul className="navbar-nav mr-auto">
+      <div className="collapse navbar-collapse">
+        <ul className="navbar-link container">
           <li className="nav-item">
             <Link to="/" className="nav-link">
-              Home
+              Forum
             </Link>
           </li>
           <li className="nav-item">
