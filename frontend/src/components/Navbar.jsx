@@ -2,11 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 export default function Navbar({ onLogout }) {
+  
+  const imageObject = require(`../assets/BeeConnected.png`);
+  const imageURL = imageObject.default;
+  
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-      <Link className="navbar-brand" to="/">
-        SDA starter
-      </Link>
+    <nav className="navbar container">
+      <div className="logo container">
+        <Link className="navbar-brand" to="/">
+        <img src={imageURL} className="logo" alt="bees" />
+        </Link>
+      </div>
       <button
         className="navbar-toggler"
         type="button"
@@ -26,13 +32,6 @@ export default function Navbar({ onLogout }) {
               Home
             </Link>
           </li>
-
-          <li className="nav-item">
-            <Link to="/posts" className="nav-link">
-              Posts
-            </Link>
-          </li>
-
           <li className="nav-item">
             <Link to="/chat" className="nav-link">
               Chat
@@ -41,7 +40,7 @@ export default function Navbar({ onLogout }) {
         </ul>
 
         <button
-          className="btn btn-outline-info my-2 my-sm-0"
+          className="btn logout"
           onClick={onLogout}
         >
           Logout
