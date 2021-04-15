@@ -4,15 +4,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Navbar({ onLogout }) {
   
-  const imageObject = require(`../assets/BeeConnected.png`);
-  const imageURL = imageObject.default;
   
   return (
     <nav>
       <div className="navbar-container">
       <div className="logo container">
         <Link className="navbar-brand" to="/">
-        <img src={imageURL} className="logo" alt="bees" />
+        <img src="../assets/BeeConnected.png" className="logo" alt="bees" />
         </Link>
       </div>
       <div className= "list-container">

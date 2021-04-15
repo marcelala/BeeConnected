@@ -5,6 +5,7 @@
 .main{
     background-color:var(--off-white);
     display: grid;
+    padding: 2rem;
 }
 
 
