@@ -1,28 +1,30 @@
-nav {
+nav{
   position: absolute;
-  background: rgba(208, 174, 108, 0.71);
+  background: var(--beige);
   width: 100%;
-  height: 2rem;
-  display: flex;
-  align-items: initial;
+  height: 4rem;
   z-index: 999;
-  margin-bottom: 2rem;
-  padding: 3rem;
-  align-items: center;
-  text-align: center;
-  padding: 0.5rem 0;
-  justify-content: space-around;
-  min-height: 10vh;
+  margin-bottom: 1rem;
+}
+
+.navbar-container{
+    margin-bottom: 2rem;
+    padding: 1rem;
+    padding: 0.5rem 0;
+    display: grid;
+    grid-template-areas: 
+    "logo links logout";
 }
 
 .list-container {
   background-color: transparent;
-  position: sticky;
+  display: flex;
   flex-direction: row;
+  
 }
 
 .nav-link {
-  color: #53361c;
+  color: var(--dark-brown);
   font-size: 1rem;
   font-weight: normal;
   position: relative;
@@ -40,4 +42,8 @@ nav {
 
 .nav-item{
     margin: 0 1rem;
+}
+
+.logout{
+    
 }

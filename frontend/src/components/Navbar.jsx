@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function Navbar({ onLogout }) {
   
@@ -7,7 +8,8 @@ export default function Navbar({ onLogout }) {
   const imageURL = imageObject.default;
   
   return (
-    <nav className="navbar container">
+    <nav>
+      <div className="navbar-container">
       <div className="logo container">
         <Link className="navbar-brand" to="/">
         <img src={imageURL} className="logo" alt="bees" />
@@ -27,12 +29,10 @@ export default function Navbar({ onLogout }) {
           </li>
         </ul>
           </div>
-        <button
-          className="btn logout"
-          onClick={onLogout}
-        >
-          Logout
-        </button>
+          <a href="" className="logout" onClick={onLogout}>
+                            <FontAwesomeIcon className="i" icon={["fa", "sign-out-alt"]} />
+                        </a>
+        </div>
     </nav>
   );
 }

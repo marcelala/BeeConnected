@@ -46,10 +46,13 @@ export default function HomePage() {
   ));
 
   return (
-    <div>
+    <div className="main">
+      <div className="newPost">
       <NewPostForm onSubmit={(postData) => createPost(postData)} />
-
+      </div>
+      <div className="posts">
       {PostsArray}
+      </div>
     </div>
   );
 }
