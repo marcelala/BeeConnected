@@ -58,6 +58,7 @@ public class PostController {
     // return ResponseEntity.status(HttpStatus.CREATED).body(post);
     // }
 
+    // Need to test functionality
     @PutMapping("/{id}") // should update the post based on the provided id
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost) {
         Post post = postService.updatePost(id, updatedPost);
