@@ -1,40 +1,55 @@
 // NPM Packages
-import React from "react";
-import PostPage from "../posts/PostsPage"
+import React, { useEffect, useState } from "react";
+
+// Project files
+import PostsApi from "../../api/PostsApi";
+import PostCard from "../../components/post/PostCard";
+import NewPostForm from "../../components/post/NewPostForm";
 
 export default function HomePage() {
+  // Local state
+  const [posts, setPosts] = useState([]);
+
+  // Methods
+  async function createPost(postData) {
+    try {
+      const response = await PostsApi.createPost(postData);
+      const post = response.data;
+      const newPosts = posts.concat(post);
+
+      setPosts(newPosts);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function deletePost(post) {
+    try {
+      await PostsApi.deletePost(post.id);
+      const newPosts = posts.filter((p) => p.id !== post.id);
+
+      setPosts(newPosts);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  useEffect(() => {
+    PostsApi.getAllPosts()
+      .then(({ data }) => setPosts(data))
+      .catch((err) => console.error(err));
+  }, [setPosts]);
+
+  // Components
+  const PostsArray = posts.map((post) => (
+    <PostCard key={post.id} post={post} onDeleteClick={() => deletePost(post)} />
+  ));
+
   return (
-    <div className="card">
-      <div className="card-body">
+    <div>
+      <NewPostForm onSubmit={(postData) => createPost(postData)} />
 
-
-        <PostPage/>
-        <h4 className="card-title">SDA starter template</h4>
-        <p>
-          This starter template is based on Spring, PostgreSQL, React, React
-          router and Axios. Check the following links for documentation and
-          guides:
-        </p>
-        <ul>
-          <li>
-            <a href="https://spring.io/projects/spring-boot">Spring</a>
-          </li>
-          <li>
-            <a href="https://www.postgresql.org">PostgreSQL</a>
-          </li>
-          <li>
-            <a href="https://reactjs.org">React</a>
-          </li>
-          <li>
-            <a href="https://reacttraining.com/react-router/web/guides/quick-start">
-              React Router
-            </a>
-          </li>
-          <li>
-            <a href="https://github.com/axios/axios">Axios</a>
-          </li>
-        </ul>
-      </div>
+      {PostsArray}
     </div>
   );
 }

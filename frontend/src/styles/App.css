@@ -1,3 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 @import "./Global.css";
 @import "./Navbar.css";
+@import "./PostCard.css";
+@import "./CommentCard.css";
+@import "./Forms.css";

@@ -3,6 +3,41 @@
   }
 
 body{
-    background-color: FBF2D7;
+    background-color: #FBF2D7;
+    width: 100%;
+    height: 100%;
+
 }
 
+a{
+  text-decoration: none;
+  color:inherit;
+}
+
+ul{
+  list-style: none;
+}
+
+p{
+  font-size: 1.6rem;
+}
+
+img{
+  margin: 2 0;
+}
+
+section{
+  padding: 5rem 0;
+}
+
+.btn, .btn.post{
+    background: rgba(154, 125, 22, 1);
+    border: none;
+    border-radius: 2rem;
+    color: rgba(251, 242, 215, 1);
+    display: inline-block;
+    padding: .5rem 1.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: background-color 650ms;
+}
