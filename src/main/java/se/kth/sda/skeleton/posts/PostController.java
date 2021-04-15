@@ -4,9 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import se.kth.sda.skeleton.ResourceNotFoundException;
+import se.kth.sda.skeleton.exception.ResourceNotFoundException;
 import se.kth.sda.skeleton.user.User;
-import se.kth.sda.skeleton.user.UserRepository;
 import se.kth.sda.skeleton.user.UserService;
 
 import java.security.Principal;
