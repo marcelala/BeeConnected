@@ -51,3 +51,20 @@ with you on your repo. Go to `Settings` -> `Manage Access` and then add your gro
 
 ### Task
 You will find your task in [`Task.md`](Task.md)
+
+These are the endpoints for the posts API that should exist:
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/posts`      | return all posts. |
+| `GET`    | `/posts/{id}` | return a specific post based on the provided id.|
+| `POST`   | `/posts`      | create a new post.|
+| `PUT`    | `/posts/{id}` | update the given post.|
+| `DELETE` | `/posts/{id}` | delete the given post.|
+
+These are the endpoints for the comments API that should exist:
+| HTTP Method | HTTP Path | Action |
+| ------------|-----------|--------|
+| `GET`    | `/comments/{postId}`      | return all comments for a specific post. |
+| `POST`   | `/comments/{postId}`      | create a new comment.|
+| `PUT`    | `/comments/{id}` | update the given comment.|
+| `DELETE` | `/comments/{id}` | delete the given comment.|

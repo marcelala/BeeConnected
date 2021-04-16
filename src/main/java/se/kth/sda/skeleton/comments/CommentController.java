@@ -34,17 +34,20 @@ public class CommentController {
         this.userService = userService;
     }
 
-    @GetMapping
-    public List<Comment> listAllCommentss() {
-        List<Comment> comment = commentRepository.findAll();
-        return comment;
+
+    @GetMapping("/{postId}") // list all comments for a given post
+    public ResponseEntity <List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
+        //should it be accessing the posts
+        Post post =postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+        return ResponseEntity.ok(post.getComments());
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Comment> getComment(@PathVariable Long id) {
-        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        return ResponseEntity.ok(comment);
-    }
+//      Redundant and impractical mapping will be deleted
+//    @GetMapping("/{id}")
+//    public ResponseEntity<Comment> getComment(@PathVariable Long id) {
+//        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+//        return ResponseEntity.ok(comment);
+//    }
 
     @PostMapping("/{postId}")
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment,
