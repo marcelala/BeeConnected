@@ -50,7 +50,7 @@ export default function HomePage() {
       <div className="container newPost">
       <NewPostForm onSubmit={(postData) => createPost(postData)} />
       </div>
-      <div className="posts">
+      <div className="container posts">
       {PostsArray}
       </div>
     </div>

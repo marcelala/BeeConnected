@@ -1,18 +1,23 @@
 nav{
-  background: var(--beige);
-  width: 100%;
-  height: 4rem;
-  z-index: 999;
+    padding: .3rem 0;
+    color: var(--dark-brown);
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+    background: var(--beige);
+    height: 4rem;
+    position: relative;
 }
 
 .navbar-container{
-    margin-bottom: 2rem;
-    padding: 1rem;
-    padding: 0.5rem 0;
     display: grid;
     grid-template-areas: 
-    "logo   links   logout";
+    "logo-container   list-container   logout";
     grid-template-columns: 1fr 4fr .5fr;
+    vertical-align: center;
+    height: 4rem;
+    
 }
 
 .list-container{
@@ -28,15 +33,8 @@ nav{
   position: relative;
   transition: color 0.5s;
   text-transform: uppercase;
-  justify-content: flex-end;
 }
 
-.nav-brand {
-  width: 8rem;
-  min-width: 4rem;
-  justify-content: flex-start;
-  padding: auto;
-}
 
 .logo{
     width: 8rem;
@@ -50,4 +48,8 @@ nav{
 .logout{
     width: 4rem;
     height: 4rem;
+}
+
+.logo-container{
+    place-self: center;
 }

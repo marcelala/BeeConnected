@@ -14,7 +14,6 @@ export default function Navbar({ onLogout }) {
         <img src= {Logo} className="logo" alt="bees" />
         </Link>
       </div>
-      <div className= "">
         <ul className="list-container">
           <li className="nav-item">
             <Link to="/" className="nav-link">
@@ -27,7 +26,6 @@ export default function Navbar({ onLogout }) {
             </Link>
           </li>
         </ul>
-          </div>
           <a href="" className="logout" onClick={onLogout}>
                             <FontAwesomeIcon className="i" icon={["fa", "sign-out-alt"]} />
                         </a>
