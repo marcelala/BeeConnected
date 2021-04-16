@@ -11,10 +11,6 @@ import se.kth.sda.skeleton.user.UserService;
 import java.security.Principal;
 import java.util.List;
 
-/*
-    @TODO create the methods needed to implement the API.
-    Don't forget to add necessary annotations.
- */
 @RequestMapping("/posts")
 @RestController
 public class PostController {
@@ -37,15 +33,27 @@ public class PostController {
     }
 
     @GetMapping("/{id}") // should return a specific post based on the provided id.
-    public ResponseEntity<Post> getArticle(@PathVariable Long id) {
+    public ResponseEntity<Post> getPost(@PathVariable Long id) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post);
     }
 
-    @PostMapping // should create a new post
-    public ResponseEntity<Post> createPost(@RequestBody Post post) {
+    // @PostMapping // should create a new post
+    // public ResponseEntity<Post> createPost(@RequestBody Post post) {
+    // postRepository.save(post);
+    // return ResponseEntity.status(HttpStatus.CREATED).body(post);
+    // }
+
+    // Create a new post on User given by User
+
+    @PostMapping
+    public ResponseEntity<Post> createUserPost(@RequestBody Post post, Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        post.setPostOwner(user);
         postRepository.save(post);
         return ResponseEntity.status(HttpStatus.CREATED).body(post);
+
     }
 
     // @PostMapping // should create a new post
@@ -65,13 +73,12 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-    @DeleteMapping("/{id}") // should delete the post based on the provided id
-    public ResponseEntity<Post> deleteArticle(@PathVariable Long id, Principal principal) {
-        String userName = principal.getName();
-        User user = userService.findUserByEmail(userName);
-        System.out.println(user.getName());
-        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        postRepository.delete(post);
-        return ResponseEntity.ok(post);
-    }
+//    @DeleteMapping("/{id}") // should delete the post based on the provided id
+//    public ResponseEntity<Post> deletePost(@PathVariable Long id) {
+//         Sort out  ERROR:  update or delete on table "post" violates foreign key constraint "fk31ux9b440dy1qca04vriap4m5" o
+//        n table "comment"
+//        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+//        postRepository.delete(post);
+//        return ResponseEntity.ok(post);
+//    }
 }

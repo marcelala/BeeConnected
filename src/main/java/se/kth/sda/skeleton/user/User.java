@@ -2,12 +2,17 @@ package se.kth.sda.skeleton.user;
 
 import org.hibernate.validator.constraints.Length;
 
+import se.kth.sda.skeleton.comments.Comment;
+import se.kth.sda.skeleton.posts.Post;
+
+import java.util.List;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 @Entity
-@Table(name="account")
+@Table(name = "account")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,24 +24,32 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-
-    @Length(min = 5, max=100, message = "Password length most be between 5-100 characters")
+    @Length(min = 5, max = 100, message = "Password length most be between 5-100 characters")
     @Column(name = "password")
     private String password;
 
-    @Length(min = 3, max=100, message = "Name must be between 3-100 characters")
+    @Length(min = 3, max = 100, message = "Name must be between 3-100 characters")
     @Column(name = "name")
     private String name;
 
-    // Hibernate needs a default constructor to function
-    public User() {}
+    @OneToMany(mappedBy = "userCommentOwner")
+    private List<Comment> comments;
 
-    public User(@Email(message = "Invalid email address! Please provide a valid email address") @NotEmpty(message = "Please provide an email address") String email, @Length(min = 5, max = 100, message = "Password length most be between 5-100 characters") String password, @Length(min = 3, max = 100, message = "Name must be between 3-100 characters") String name) {
+    @OneToMany(mappedBy = "postOwner")
+    private List<Post> posts;
+
+    // Hibernate needs a default constructor to function
+    public User() {
+    }
+
+    public User(
+            @Email(message = "Invalid email address! Please provide a valid email address") @NotEmpty(message = "Please provide an email address") String email,
+            @Length(min = 5, max = 100, message = "Password length most be between 5-100 characters") String password,
+            @Length(min = 3, max = 100, message = "Name must be between 3-100 characters") String name) {
         this.email = email;
         this.password = password;
         this.name = name;
     }
-
 
     public Long getId() {
         return id;
@@ -69,4 +82,21 @@ public class User {
     public void setName(String name) {
         this.name = name;
     }
+
+    public List<Post> getPosts() {
+        return this.posts;
+    }
+
+    public void setPosts(List<Post> posts) {
+        this.posts = posts;
+    }
+
+    public List<Comment> getComments() {
+        return this.comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
 }
