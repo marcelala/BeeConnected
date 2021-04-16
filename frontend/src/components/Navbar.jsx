@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Logo from "../assets/BeeConnected.png"
 
 export default function Navbar({ onLogout }) {
   
@@ -10,11 +11,11 @@ export default function Navbar({ onLogout }) {
       <div className="navbar-container">
       <div className="logo container">
         <Link className="navbar-brand" to="/">
-        <img src="../assets/BeeConnected.png" className="logo" alt="bees" />
+        <img src= {Logo} className="logo" alt="bees" />
         </Link>
       </div>
-      <div className= "list-container">
-        <ul className="">
+      <div className= "">
+        <ul className="list-container">
           <li className="nav-item">
             <Link to="/" className="nav-link">
               Forum
