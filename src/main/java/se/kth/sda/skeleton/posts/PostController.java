@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import se.kth.sda.skeleton.comments.CommentRepository;
 import se.kth.sda.skeleton.exception.ResourceNotFoundException;
 import se.kth.sda.skeleton.user.User;
 import se.kth.sda.skeleton.user.UserService;
@@ -18,6 +19,7 @@ public class PostController {
     PostRepository postRepository;
     PostService postService;
     UserService userService;
+    CommentRepository commentRepository;
 
     @Autowired
     public PostController(PostRepository postRepository, PostService postService, UserService userService) {
@@ -44,9 +46,9 @@ public class PostController {
     // return ResponseEntity.status(HttpStatus.CREATED).body(post);
     // }
 
-    // Create a new post on User given by User
 
-    @PostMapping
+
+    @PostMapping // Create a new post on User given by User
     public ResponseEntity<Post> createUserPost(@RequestBody Post post, Principal principal) {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
@@ -73,12 +75,11 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-//    @DeleteMapping("/{id}") // should delete the post based on the provided id
-//    public ResponseEntity<Post> deletePost(@PathVariable Long id) {
-//         Sort out  ERROR:  update or delete on table "post" violates foreign key constraint "fk31ux9b440dy1qca04vriap4m5" o
-//        n table "comment"
-//        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-//        postRepository.delete(post);
-//        return ResponseEntity.ok(post);
-//    }
+    @DeleteMapping("/{id}") // should delete the post based on the provided id
+    public ResponseEntity<Post> deletePost(@PathVariable Long id) {
+        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        post.getComments().remove(id);
+        postRepository.delete(post);
+        return ResponseEntity.ok(post);
+    }
 }
