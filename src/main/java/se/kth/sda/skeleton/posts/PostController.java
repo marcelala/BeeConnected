@@ -73,11 +73,12 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
-    @DeleteMapping("/{id}") // should delete the post based on the provided id
-    public ResponseEntity<Post> deletePost(@PathVariable Long id) {
-
-        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        postRepository.delete(post);
-        return ResponseEntity.ok(post);
-    }
+//    @DeleteMapping("/{id}") // should delete the post based on the provided id
+//    public ResponseEntity<Post> deletePost(@PathVariable Long id) {
+//         Sort out  ERROR:  update or delete on table "post" violates foreign key constraint "fk31ux9b440dy1qca04vriap4m5" o
+//        n table "comment"
+//        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+//        postRepository.delete(post);
+//        return ResponseEntity.ok(post);
+//    }
 }

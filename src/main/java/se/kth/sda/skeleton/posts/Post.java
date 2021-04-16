@@ -15,6 +15,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import se.kth.sda.skeleton.comments.Comment;
 import se.kth.sda.skeleton.user.User;
 
@@ -36,6 +38,7 @@ public class Post {
     private User postOwner;
 
     @OneToMany(mappedBy = "commentOwner")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
 
     public Post() {
