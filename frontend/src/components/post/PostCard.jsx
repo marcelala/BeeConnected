@@ -10,14 +10,13 @@ export default function PostCard({ post, onDeleteClick }) {
 
   console.log(comments);
 
-  // useEffect(() => {
-  //   CommentsApi.getCommentByPostId(post.id)
-  //     .then((data) => {
-  //       console.log(data);
-  //       setComments(data);
-  //     })
-  //     .catch((err) => console.error(err));
-  // }, [setComments]);
+  useEffect(() => {
+    CommentsApi.getCommentByPostId(post.id)
+      .then(({ data }) => {
+        setComments(data);
+      })
+      .catch((err) => console.error(err));
+  }, [setComments]);
 
   // Components;
 
