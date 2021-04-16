@@ -65,7 +65,6 @@ These are the endpoints for the comments API that should exist:
 | HTTP Method | HTTP Path | Action |
 | ------------|-----------|--------|
 | `GET`    | `/comments/{postId}`      | return all comments for a specific post. |
-| `GET`    | `/comments/{id}` | return a specific comment based on the provided id.|
 | `POST`   | `/comments/{postId}`      | create a new comment.|
 | `PUT`    | `/comments/{id}` | update the given comment.|
 | `DELETE` | `/comments/{id}` | delete the given comment.|
