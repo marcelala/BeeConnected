@@ -1,14 +1,30 @@
-* {
+*,
+*::after,
+*::after{
     font-family: "Montserrat", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
   }
 
 .main{
-    background-color:var(--off-white);
-    display: grid;
     padding: 2rem;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
+html,
+body {
+  max-width: 1800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container.route{
+  background-color:var(--off-white);
+}
 
 a{
   text-decoration: none;

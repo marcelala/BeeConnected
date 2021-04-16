@@ -29,6 +29,7 @@ export default function App() {
 
   // Components
   const loggedInRouter = (
+    <div className="main">
     <BrowserRouter>
       <Navbar onLogout={() => Auth.logout()} />
 
@@ -49,6 +50,7 @@ export default function App() {
         <Footer/>
       </div>
     </BrowserRouter>
+    </div>
   );
 
   return loggedIn ? loggedInRouter : <AuthPage />;

@@ -46,8 +46,8 @@ export default function HomePage() {
   ));
 
   return (
-    <div className="main">
-      <div className="newPost">
+    <div className="container">
+      <div className="container newPost">
       <NewPostForm onSubmit={(postData) => createPost(postData)} />
       </div>
       <div className="posts">
