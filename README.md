@@ -58,7 +58,7 @@ These are the endpoints for the posts API that should exist:
 | `GET`    | `/posts`      | return all posts. |
 | `GET`    | `/posts/{id}` | return a specific post based on the provided id.|
 | `POST`   | `/posts`      | create a new post.|
-| `PUT`    | `/articles/{id}` | update the given post.|
+| `PUT`    | `/posts/{id}` | update the given post.|
 | `DELETE` | `/posts/{id}` | delete the given post.|
 
 These are the endpoints for the comments API that should exist:
