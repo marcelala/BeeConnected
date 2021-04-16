@@ -42,17 +42,19 @@ export default function HomePage() {
 
   // Components
   const PostsArray = posts.map((post) => (
-    <PostCard key={post.id} post={post} onDeleteClick={() => deletePost(post)} />
+    <PostCard
+      key={post.id}
+      post={post}
+      onDeleteClick={() => deletePost(post)}
+    />
   ));
 
   return (
     <div className="container">
       <div className="container newPost">
-      <NewPostForm onSubmit={(postData) => createPost(postData)} />
+        <NewPostForm onSubmit={(postData) => createPost(postData)} />
       </div>
-      <div className="posts">
-      {PostsArray}
-      </div>
+      <div className="posts">{PostsArray}</div>
     </div>
   );
 }

@@ -7,19 +7,20 @@ export default function PostForm({ onSubmit }) {
 
   const handleSubmit = () => {
     // Invoke the passed in event callback
-    onSubmit({ 
-      title:title,
-      body: body });
+    onSubmit({
+      title: title,
+      body: body,
+    });
 
     // Clear the input field
     setBody("");
   };
 
   return (
-    <div className="card new-post">
+    <form className="card new-post">
       <div className="form-group">
         <div className="form-title">
-          <textarea
+          <input
             className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -38,6 +39,6 @@ export default function PostForm({ onSubmit }) {
           Post
         </button>
       </div>
-    </div>
+    </form>
   );
 }

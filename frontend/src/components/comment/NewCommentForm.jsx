@@ -5,14 +5,18 @@ export default function NewCommentForm({ onSubmit }) {
 
   const handleSubmit = () => {
     // Invoke the passed in event callback
-    onSubmit({ body: body });
+    onSubmit({
+      body: body,
+    });
 
     // Clear the input field
     setBody("");
   };
 
+  //<NewPostForm onSubmit={(postData) => createPost(postData)} />;
+
   return (
-    <div className="card new-comment">
+    <form className="card new-comment">
       <div className="form-group">
         <div className="form-body">
           <textarea
@@ -24,9 +28,9 @@ export default function NewCommentForm({ onSubmit }) {
       </div>
       <div className="form-group">
         <button className="btn post comment" onClick={handleSubmit}>
-          Post
+          Comment
         </button>
       </div>
-    </div>
+    </form>
   );
 }
