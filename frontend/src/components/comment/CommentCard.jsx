@@ -8,7 +8,7 @@ export default function CommentCard({ comment, onDeleteClick }) {
       <h2>avatar goes here</h2>
       </div> */}
       <button className="btn delete" onClick={onDeleteClick}>
-        x
+        Delete
       </button>
       <div className="card-body">
         <h4>{comment.body}</h4>

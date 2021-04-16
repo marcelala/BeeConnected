@@ -7,8 +7,9 @@ import NewCommentForm from "../comment/NewCommentForm";
 export default function PostCard({ post, onDeleteClick }) {
   // Local state
   const [comments, setComments] = useState([]);
+  const [toggleComments, setToggleComments] = useState(false);
 
-  console.log(comments);
+  console.log(toggleComments);
 
   useEffect(() => {
     CommentsApi.getCommentByPostId(post.id)
@@ -21,7 +22,11 @@ export default function PostCard({ post, onDeleteClick }) {
   // Components;
 
   const CommentsArray = comments.map((comment) => (
-    <CommentCard key={comment.id} comment={comment} />
+    <CommentCard
+      key={comment.id}
+      comment={comment}
+      onDeleteClick={() => deleteComment(comment)}
+    />
   ));
 
   async function createComment(commentData) {
@@ -32,6 +37,17 @@ export default function PostCard({ post, onDeleteClick }) {
       const newComment = comments.concat(comment);
 
       setComments(newComment);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  async function deleteComment(comment) {
+    try {
+      await CommentsApi.deleteComment(comment.id);
+      const newComments = comments.filter((c) => c.id !== comment.id);
+
+      setComments(newComments);
     } catch (e) {
       console.error(e);
     }
@@ -48,19 +64,31 @@ export default function PostCard({ post, onDeleteClick }) {
       <div className="card-body">
         <h4>{post.body}</h4>
       </div>
-      <button className="btn delete" onClick={onDeleteClick}>
-        ...
+      <button className="btn delete" type="button" onClick={onDeleteClick}>
+        Delete
       </button>
       <div className="date">Date and time created</div>
       <div className="comment-icon">
-        icon for comments that expands the container and displays past comments
+        <div>{comments.length}</div>
+        <button
+          type="button"
+          onClick={() =>
+            toggleComments ? setToggleComments(false) : setToggleComments(true)
+          }
+        >
+          Comments
+        </button>
       </div>
-      <div className="comments-form">
-        <NewCommentForm
-          onSubmit={(commentData) => createComment(commentData)}
-        />
-      </div>
-      <div className="comments-container">{CommentsArray}</div>
+      {toggleComments && (
+        <div>
+          <div className="comments-form">
+            <NewCommentForm
+              onSubmit={(commentData) => createComment(commentData)}
+            />
+          </div>
+          <div className="comments-container">{CommentsArray}</div>
+        </div>
+      )}
     </div>
   );
 }
