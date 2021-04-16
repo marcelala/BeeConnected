@@ -27,7 +27,7 @@ export default function NewCommentForm({ onSubmit }) {
         </div>
       </div>
       <div className="form-group">
-        <button className="btn post comment" onClick={handleSubmit}>
+        <button className="btn post comment" type="button" onClick={handleSubmit}>
           Comment
         </button>
       </div>
