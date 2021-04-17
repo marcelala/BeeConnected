@@ -1,5 +1,6 @@
 package se.kth.sda.skeleton.posts;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -9,6 +10,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -29,6 +32,8 @@ public class Post {
 
     private String body;
     private String title;
+    private Date created;
+    private Date updated;
 
     @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "email")
@@ -40,6 +45,16 @@ public class Post {
     @OneToMany(mappedBy = "commentOwner")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Comment> comments;
+
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
 
     public Post() {
     }
@@ -96,6 +111,22 @@ public class Post {
 
     public void setComments(List<Comment> comments) {
         this.comments = comments;
+    }
+
+    public Date getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated() {
+        return this.updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
 }
