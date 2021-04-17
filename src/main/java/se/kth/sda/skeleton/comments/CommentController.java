@@ -14,10 +14,6 @@ import se.kth.sda.skeleton.user.UserService;
 import java.security.Principal;
 import java.util.List;
 
-/*
-    @TODO create the methods needed to implement the API.
-    Don't forget to add necessary annotations.
- */
 @RequestMapping("/comments")
 @RestController
 public class CommentController {
@@ -25,30 +21,26 @@ public class CommentController {
     CommentRepository commentRepository;
     PostRepository postRepository;
     UserService userService;
+    CommentService commentService;
 
     @Autowired
+
     public CommentController(CommentRepository commentRepository, PostRepository postRepository,
-            UserService userService) {
+            UserService userService, CommentService commentService) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
-
-    @GetMapping("/{postId}") // list all comments for a given post
-    public ResponseEntity <List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
-        //should it be accessing the posts
-        Post post =postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+    // List all comments for a given post
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post.getComments());
     }
 
-//      Redundant and impractical mapping will be deleted
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Comment> getComment(@PathVariable Long id) {
-//        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-//        return ResponseEntity.ok(comment);
-//    }
-
+    // Create a comment on a given post.
     @PostMapping("/{postId}")
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment,
             Principal principal) {
@@ -64,10 +56,19 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Comment> deleteComment(@PathVariable Long id) {
-        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        commentRepository.delete(comment);
+    // Update a comment by the given commentId
+    @PutMapping("/{commentId}")
+    public ResponseEntity<Comment> updateComment(@PathVariable Long commentId, @RequestBody Comment updatedComment,
+            Principal principal) {
+        Comment comment = commentService.updateComment(commentId, updatedComment, principal);
         return ResponseEntity.ok(comment);
+    }
+
+    // Delete a comment by the five commentId
+    @DeleteMapping("/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable Long commentId, Principal principal) {
+        Comment comment = commentService.deleteComment(commentId, principal);
+        commentRepository.delete(comment);
     }
 }

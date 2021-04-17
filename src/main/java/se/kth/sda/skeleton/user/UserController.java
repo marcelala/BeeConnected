@@ -1,8 +1,9 @@
 package se.kth.sda.skeleton.user;
 
-import java.util.List;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -12,16 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     UserRepository userRepository;
+    UserService userService;
 
     @Autowired
-    public UserController(UserRepository userRepository) {
+    public UserController(UserRepository userRepository, UserService userService) {
         this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping
-    public List<User> listAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users;
+    public ResponseEntity<User> getUser(Principal principal) {
+        String userName = principal.getName();
+        User user = userService.findUserByEmail(userName);
+        return ResponseEntity.ok(user);
     }
 
 }
