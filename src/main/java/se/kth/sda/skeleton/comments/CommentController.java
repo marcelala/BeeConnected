@@ -14,10 +14,6 @@ import se.kth.sda.skeleton.user.UserService;
 import java.security.Principal;
 import java.util.List;
 
-/*
-    @TODO create the methods needed to implement the API.
-    Don't forget to add necessary annotations.
- */
 @RequestMapping("/comments")
 @RestController
 public class CommentController {
@@ -34,20 +30,13 @@ public class CommentController {
         this.userService = userService;
     }
 
-
-    @GetMapping("/{postId}") // list all comments for a given post
-    public ResponseEntity <List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
-        //should it be accessing the posts
-        Post post =postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
+    // list all comments for a given post
+    @GetMapping("/{postId}")
+    public ResponseEntity<List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
+        // should it be accessing the posts
+        Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post.getComments());
     }
-
-//      Redundant and impractical mapping will be deleted
-//    @GetMapping("/{id}")
-//    public ResponseEntity<Comment> getComment(@PathVariable Long id) {
-//        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-//        return ResponseEntity.ok(comment);
-//    }
 
     @PostMapping("/{postId}")
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment,
@@ -65,9 +54,14 @@ public class CommentController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Comment> deleteComment(@PathVariable Long id) {
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable Long id, Principal principal) {
         Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+
+        String userName = principal.getName();
+        if (!userName.equals(comment.getUserCommentOwner().getEmail())) {
+            throw new ResourceNotFoundException();
+        }
         commentRepository.delete(comment);
-        return ResponseEntity.ok(comment);
     }
 }

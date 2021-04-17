@@ -46,8 +46,6 @@ public class PostController {
     // return ResponseEntity.status(HttpStatus.CREATED).body(post);
     // }
 
-
-
     @PostMapping // Create a new post on User given by User
     public ResponseEntity<Post> createUserPost(@RequestBody Post post, Principal principal) {
         String userName = principal.getName();
@@ -69,21 +67,23 @@ public class PostController {
     // }
 
     // Need to test functionality
-//    @PutMapping("/{id}") // should update the post based on the provided id
-//    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost, Principal principal) {
-//        Post post = postService.updatePost(id, updatedPost, principal);
-//        return ResponseEntity.ok(post);
-//    }
+    // @PutMapping("/{id}") // should update the post based on the provided id
+    // public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody
+    // Post updatedPost, Principal principal) {
+    // Post post = postService.updatePost(id, updatedPost, principal);
+    // return ResponseEntity.ok(post);
+    // }
 
-    @DeleteMapping("/{id}") // should delete the post based on the provided id
-    public ResponseEntity<Post> deletePost(@PathVariable Long id, Principal principal) {
+    // should delete the post based on the provided id
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deletePost(@PathVariable Long id, Principal principal) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
-        if (!userName.equals(post.getPostOwner().getEmail())){
+        if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
         }
-        post.getComments().remove(id);
         postRepository.delete(post);
-        return ResponseEntity.ok(post);
     }
 }

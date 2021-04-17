@@ -23,14 +23,11 @@ public class PostService {
         this.userService = userService;
     }
 
-
-
-
     public Post updatePost(Long id, Post updatedPost, Principal principal) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
-        if (!userName.equals(post.getPostOwner().getEmail())){
+        if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
 
         }
