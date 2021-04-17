@@ -9,6 +9,24 @@ export default function CommentCard({ comment, onDeleteClick, user }) {
     return false;
   }
 
+  function dateCreatedOrUpdatedCheck() {
+    if (comment.created === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function date() {
+    if (dateCreatedOrUpdatedCheck()) {
+      const createDate = comment.created.substring(0, 10);
+      return `Created: ${createDate}`;
+    } else {
+      const updateDate = comment.updated.substring(0, 10);
+      return `Updated: ${updateDate}`;
+    }
+  }
+
   return (
     <div className="commentCard container">
       {/* <div className="avatar container">
@@ -23,7 +41,7 @@ export default function CommentCard({ comment, onDeleteClick, user }) {
         <h4>{comment.body}</h4>
         <p>{comment.userCommentOwner}</p>
       </div>
-      <div className="date">Date and time created</div>
+      <div className="date">{date()}</div>
     </div>
   );
 }

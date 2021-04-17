@@ -60,6 +60,24 @@ export default function PostCard({ post, onDeleteClick }) {
     return false;
   }
 
+  function dateCreatedOrUpdatedCheck() {
+    if (post.created === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function date() {
+    if (dateCreatedOrUpdatedCheck()) {
+      const createDate = post.created.substring(0, 10);
+      return `Created: ${createDate}`;
+    } else {
+      const updateDate = post.updated.substring(0, 10);
+      return `Updated: ${updateDate}`;
+    }
+  }
+
   // Components;
 
   const CommentsArray = comments.map((comment) => (
@@ -88,7 +106,7 @@ export default function PostCard({ post, onDeleteClick }) {
           Delete
         </button>
       )}
-      <div className="date">Date and time created</div>
+      <div className="date">{date()}</div>
       <div className="comment-icon">
         <div>{comments.length}</div>
         <button
