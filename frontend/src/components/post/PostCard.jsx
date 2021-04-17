@@ -3,13 +3,23 @@ import React, { useEffect, useState } from "react";
 import CommentsApi from "../../api/CommentsApi";
 import CommentCard from "../comment/CommentCard";
 import NewCommentForm from "../comment/NewCommentForm";
+import UserApi from "../../api/UserApi";
 
 export default function PostCard({ post, onDeleteClick }) {
   // Local state
   const [comments, setComments] = useState([]);
   const [toggleComments, setToggleComments] = useState(false);
+  const [user, setUser] = useState({});
 
-  console.log(toggleComments);
+  // Methods
+
+  useEffect(() => {
+    UserApi.getUser()
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch((err) => console.error(err));
+  }, [setUser]);
 
   useEffect(() => {
     CommentsApi.getCommentByPostId(post.id)
@@ -19,15 +29,7 @@ export default function PostCard({ post, onDeleteClick }) {
       .catch((err) => console.error(err));
   }, [setComments]);
 
-  // Components;
-
-  const CommentsArray = comments.map((comment) => (
-    <CommentCard
-      key={comment.id}
-      comment={comment}
-      onDeleteClick={() => deleteComment(comment)}
-    />
-  ));
+  console.log(post);
 
   async function createComment(commentData) {
     console.log(commentData);
@@ -53,6 +55,23 @@ export default function PostCard({ post, onDeleteClick }) {
     }
   }
 
+  function userCheck() {
+    if (post.postOwner === user.email) {
+      return true;
+    }
+    return false;
+  }
+
+  // Components;
+
+  const CommentsArray = comments.map((comment) => (
+    <CommentCard
+      key={comment.id}
+      comment={comment}
+      onDeleteClick={() => deleteComment(comment)}
+    />
+  ));
+
   return (
     <div className="postCard container">
       <div className="avatar container">
@@ -64,9 +83,11 @@ export default function PostCard({ post, onDeleteClick }) {
       <div className="card-body">
         <h4>{post.body}</h4>
       </div>
-      <button className="btn delete" type="button" onClick={onDeleteClick}>
-        Delete
-      </button>
+      {userCheck() && (
+        <button className="btn delete" type="button" onClick={onDeleteClick}>
+          Delete
+        </button>
+      )}
       <div className="date">Date and time created</div>
       <div className="comment-icon">
         <div>{comments.length}</div>

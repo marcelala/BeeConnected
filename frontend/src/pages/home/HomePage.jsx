@@ -42,6 +42,7 @@ export default function HomePage() {
   }
 
   // Components
+
   const PostsArray = posts.map((post) => (
     <PostCard
       key={post.id}
