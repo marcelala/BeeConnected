@@ -48,6 +48,16 @@ public class Post {
         this.body = body;
     }
 
+    public Post setUpdatePostValues(Post updatedPost) {
+        if (updatedPost.getBody() == null) {
+            updatedPost.setBody(this.getBody());
+        }
+        if (updatedPost.getTitle() == null) {
+            updatedPost.setTitle(this.getTitle());
+        }
+        return updatedPost;
+    }
+
     public String getTitle() {
         return title;
     }
