@@ -29,8 +29,6 @@ export default function PostCard({ post, onDeleteClick }) {
       .catch((err) => console.error(err));
   }, [setComments]);
 
-  console.log(post);
-
   async function createComment(commentData) {
     console.log(commentData);
     try {
@@ -69,6 +67,7 @@ export default function PostCard({ post, onDeleteClick }) {
       key={comment.id}
       comment={comment}
       onDeleteClick={() => deleteComment(comment)}
+      user={user}
     />
   ));
 
@@ -82,6 +81,7 @@ export default function PostCard({ post, onDeleteClick }) {
       </div>
       <div className="card-body">
         <h4>{post.body}</h4>
+        <p>{post.postOwner}</p>
       </div>
       {userCheck() && (
         <button className="btn delete" type="button" onClick={onDeleteClick}>
