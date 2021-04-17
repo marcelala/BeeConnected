@@ -21,23 +21,26 @@ public class CommentController {
     CommentRepository commentRepository;
     PostRepository postRepository;
     UserService userService;
+    CommentService commentService;
 
     @Autowired
+
     public CommentController(CommentRepository commentRepository, PostRepository postRepository,
-            UserService userService) {
+            UserService userService, CommentService commentService) {
         this.commentRepository = commentRepository;
         this.postRepository = postRepository;
         this.userService = userService;
+        this.commentService = commentService;
     }
 
-    // list all comments for a given post
+    // List all comments for a given post
     @GetMapping("/{postId}")
     public ResponseEntity<List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
-        // should it be accessing the posts
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post.getComments());
     }
 
+    // Create a comment on a given post.
     @PostMapping("/{postId}")
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment,
             Principal principal) {
@@ -53,15 +56,19 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
     }
 
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteComment(@PathVariable Long id, Principal principal) {
-        Comment comment = commentRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+    // Update a comment by the given commentId
+    @PutMapping("/{commentId}")
+    public ResponseEntity<Comment> updateComment(@PathVariable Long commentId, @RequestBody Comment updatedComment,
+            Principal principal) {
+        Comment comment = commentService.updateComment(commentId, updatedComment, principal);
+        return ResponseEntity.ok(comment);
+    }
 
-        String userName = principal.getName();
-        if (!userName.equals(comment.getUserCommentOwner().getEmail())) {
-            throw new ResourceNotFoundException();
-        }
+    // Delete a comment by the five commentId
+    @DeleteMapping("/{commentId}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteComment(@PathVariable Long commentId, Principal principal) {
+        Comment comment = commentService.deleteComment(commentId, principal);
         commentRepository.delete(comment);
     }
 }

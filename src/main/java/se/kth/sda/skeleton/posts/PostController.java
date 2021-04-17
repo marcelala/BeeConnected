@@ -28,25 +28,22 @@ public class PostController {
         this.userService = userService;
     }
 
-    @GetMapping // should return all posts.
+    // Return all posts.
+    @GetMapping
     public List<Post> listAllPosts() {
         List<Post> posts = postRepository.findAll();
         return posts;
     }
 
-    @GetMapping("/{id}") // should return a specific post based on the provided id.
+    // Return a specific post based on the postId.
+    @GetMapping("/{id}")
     public ResponseEntity<Post> getPost(@PathVariable Long id) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post);
     }
 
-    // @PostMapping // should create a new post
-    // public ResponseEntity<Post> createPost(@RequestBody Post post) {
-    // postRepository.save(post);
-    // return ResponseEntity.status(HttpStatus.CREATED).body(post);
-    // }
-
-    @PostMapping // Create a new post on User given by User
+    // Create a new post on User given by Logged In User
+    @PostMapping
     public ResponseEntity<Post> createUserPost(@RequestBody Post post, Principal principal) {
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
@@ -56,34 +53,18 @@ public class PostController {
 
     }
 
-    // @PostMapping // should create a new post
-    // public ResponseEntity<Post> createPost(@RequestBody Post post, Principal
-    // principal) {
-    // String userName = principal.getName();
-    // User user = userService.findUserByEmail(userName);
-    // System.out.println(user.getName());
-    // postRepository.save(post);
-    // return ResponseEntity.status(HttpStatus.CREATED).body(post);
-    // }
+    // Update the post based on the provided postId
+    @PutMapping("/{id}")
+    public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost, Principal principal) {
+        Post post = postService.updatePost(id, updatedPost, principal);
+        return ResponseEntity.ok(post);
+    }
 
-    // Need to test functionality
-    // @PutMapping("/{id}") // should update the post based on the provided id
-    // public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody
-    // Post updatedPost, Principal principal) {
-    // Post post = postService.updatePost(id, updatedPost, principal);
-    // return ResponseEntity.ok(post);
-    // }
-
-    // should delete the post based on the provided id
-
+    // Delete the post based on the provided postId.
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost(@PathVariable Long id, Principal principal) {
-        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
-        String userName = principal.getName();
-        if (!userName.equals(post.getPostOwner().getEmail())) {
-            throw new ResourceNotFoundException();
-        }
+        Post post = postService.deletePost(id, principal);
         postRepository.delete(post);
     }
 }

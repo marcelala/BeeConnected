@@ -8,9 +8,6 @@ import se.kth.sda.skeleton.user.UserService;
 
 import java.security.Principal;
 
-/*
-    @TODO Implement service methods.
- */
 @Service
 public class PostService {
 
@@ -27,13 +24,27 @@ public class PostService {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
         String userName = principal.getName();
         User user = userService.findUserByEmail(userName);
+        // Security measure to ensure a logged in User doesnt access the update Route
+        // and update someone elses post.
         if (!userName.equals(post.getPostOwner().getEmail())) {
             throw new ResourceNotFoundException();
 
         }
+        updatedPost = post.setUpdatePostValues(updatedPost);
         updatedPost.setId(id);
         updatedPost.setPostOwner(user);
         postRepository.save(updatedPost);
         return updatedPost;
+    }
+
+    public Post deletePost(Long id, Principal principal) {
+        Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
+        String userName = principal.getName();
+        // Security measure to ensure a logged in User doesnt access the update Route
+        // and update someone elses post.
+        if (!userName.equals(post.getPostOwner().getEmail())) {
+            throw new ResourceNotFoundException();
+        }
+        return post;
     }
 }

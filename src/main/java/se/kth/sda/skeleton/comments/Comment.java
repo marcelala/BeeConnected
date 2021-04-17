@@ -42,9 +42,7 @@ public class Comment {
     }
 
     public Comment(String body) {
-
         this.body = body;
-
     }
 
     public Long getId() {
