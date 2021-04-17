@@ -4,11 +4,14 @@ import CommentsApi from "../../api/CommentsApi";
 import CommentCard from "../comment/CommentCard";
 import NewCommentForm from "../comment/NewCommentForm";
 import UserApi from "../../api/UserApi";
+import EditPost from "./EditPost";
+import PostsApi from "../../api/PostsApi";
 
 export default function PostCard({ post, onDeleteClick }) {
   // Local state
   const [comments, setComments] = useState([]);
   const [toggleComments, setToggleComments] = useState(false);
+  const [toggleEdit, setToggleEdit] = useState(false);
   const [user, setUser] = useState({});
 
   // Methods
@@ -60,6 +63,14 @@ export default function PostCard({ post, onDeleteClick }) {
     return false;
   }
 
+  async function updatePost(updatedPost) {
+    try {
+      await PostsApi.updatePost(post.id, updatedPost);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
   function dateCreatedOrUpdatedCheck() {
     if (post.created === null) {
       return false;
@@ -102,9 +113,25 @@ export default function PostCard({ post, onDeleteClick }) {
         <p>{post.postOwner}</p>
       </div>
       {userCheck() && (
-        <button className="btn delete" type="button" onClick={onDeleteClick}>
-          Delete
-        </button>
+        <div>
+          <button className="btn delete" type="button" onClick={onDeleteClick}>
+            Delete
+          </button>
+          <button
+            type="button"
+            onClick={() =>
+              toggleEdit ? setToggleEdit(false) : setToggleEdit(true)
+            }
+          >
+            Edit
+          </button>
+          {toggleEdit && (
+            <EditPost
+              onSubmit={(postData) => updatePost(postData)}
+              post={post}
+            />
+          )}
+        </div>
       )}
       <div className="date">{date()}</div>
       <div className="comment-icon">
