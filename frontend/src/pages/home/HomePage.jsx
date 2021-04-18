@@ -11,6 +11,13 @@ export default function HomePage() {
   const [posts, setPosts] = useState([]);
 
   // Methods
+
+  useEffect(() => {
+    PostsApi.getAllPosts()
+      .then(({ data }) => setPosts(data))
+      .catch((err) => console.error(err));
+  }, [setPosts]);
+
   async function createPost(postData) {
     try {
       const response = await PostsApi.createPost(postData);
@@ -34,13 +41,8 @@ export default function HomePage() {
     }
   }
 
-  useEffect(() => {
-    PostsApi.getAllPosts()
-      .then(({ data }) => setPosts(data))
-      .catch((err) => console.error(err));
-  }, [setPosts]);
-
   // Components
+
   const PostsArray = posts.map((post) => (
     <PostCard
       key={post.id}

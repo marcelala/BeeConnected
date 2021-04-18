@@ -16,7 +16,7 @@ import AuthPage from "./pages/auth/AuthPage";
 import HomePage from "./pages/home/HomePage";
 import PostsPage from "./pages/posts/PostsPage";
 import ChatPage from "./pages/chat/ChatPage";
-import './styles/App.css';
+import "./styles/App.css";
 //import icons to library
 library.add(fab, far, fas);
 
@@ -30,26 +30,26 @@ export default function App() {
   // Components
   const loggedInRouter = (
     <div className="main">
-    <BrowserRouter>
-      <Navbar onLogout={() => Auth.logout()} />
+      <BrowserRouter>
+        <Navbar onLogout={() => Auth.logout()} />
 
-      <div className="container route">
-        <Switch>
-          <Route path="/posts">
-            <PostsPage />
-          </Route>
+        <div className="container route">
+          <Switch>
+            <Route path="/posts">
+              <PostsPage />
+            </Route>
 
-          <Route path="/chat">
-            <ChatPage />
-          </Route>
+            <Route path="/chat">
+              <ChatPage />
+            </Route>
 
-          <Route path="/">
-            <HomePage />
-          </Route>
-        </Switch>
-        <Footer/>
-      </div>
-    </BrowserRouter>
+            <Route path="/">
+              <HomePage />
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
+      </BrowserRouter>
     </div>
   );
 

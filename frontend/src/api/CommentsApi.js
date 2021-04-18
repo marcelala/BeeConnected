@@ -9,8 +9,8 @@ class CommentsApi {
     return Api.post("/comments/" + postId, comment);
   }
 
-  updateComment(comment, id) {
-    return Api.put("/comments", id, comment);
+  updateComment(comment, commentId) {
+    return Api.put("/comments/" + commentId, comment);
   }
 
   deleteComment(id) {
