@@ -6,7 +6,7 @@ import PostsApi from "../../api/PostsApi";
 import PostCard from "../../components/post/PostCard";
 import NewPostForm from "../../components/post/NewPostForm";
 
-export default function HomePage() {
+export default function Forum() {
   // Local state
   const [posts, setPosts] = useState([]);
 
@@ -52,11 +52,11 @@ export default function HomePage() {
   ));
 
   return (
-    <div className="container">
-      <div className="container newPost">
+    <section>
+      <div>
         <NewPostForm onSubmit={(postData) => createPost(postData)} />
       </div>
-      <div className="posts">{PostsArray}</div>
-    </div>
+      <div>{PostsArray}</div>
+    </section>
   );
 }

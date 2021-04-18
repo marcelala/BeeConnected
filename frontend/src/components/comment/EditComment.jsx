@@ -11,13 +11,14 @@ export default function EditComment({ onSubmit, comment }) {
   };
 
   return (
-    <form className="card new-comment">
-      <div className="form-group">
-        <div className="form-body">
+    <form>
+      <div>
+        <div>
           <textarea
             className="form-control"
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            type="text"
           />
         </div>
       </div>

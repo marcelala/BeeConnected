@@ -14,26 +14,26 @@ export default function EditForm({ onSubmit, post }) {
   };
 
   return (
-    <form className="card new-post">
-      <div className="form-group">
-        <div className="form-title">
+    <form>
+      <div>
+        <div>
           <input
-            className="form-control"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
+            type="text"
           />
         </div>
-        <div className="form-body">
+        <div>
           <textarea
-            className="form-control"
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            type="text"
           />
         </div>
       </div>
-      <div className="form-group">
-        <button className="btn post" onClick={handleSubmit}>
-          Post
+      <div>
+        <button className="btn" onClick={handleSubmit}>
+          Update
         </button>
       </div>
     </form>

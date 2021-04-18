@@ -1,22 +1,32 @@
-import React from "react";
+// NPM Packages
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Logo from "../assets/BeeConnected.png"
+
+//Project files
+import Logo from "../assets/BeeConnected.png";
+import Auth from "../services/Auth";
 
 export default function Navbar({ onLogout }) {
-  
-  
+  // Components
+
   return (
     <nav>
       <div className="navbar-container">
-      <div className="logo container">
-        <Link className="navbar-brand" to="/">
-        <img src= {Logo} className="logo" alt="bees" />
-        </Link>
-      </div>
         <ul className="list-container">
+          <li>
+            <div className="logo">
+              <Link className="navbar-brand" to="/home">
+                <img src={Logo} className="logo" alt="bees" />
+              </Link>
+            </div>
+          </li>
           <li className="nav-item">
-            <Link to="/" className="nav-link">
+            <Link to="/home" className="nav-link">
+              Home
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/forum" className="nav-link">
               Forum
             </Link>
           </li>
@@ -25,11 +35,13 @@ export default function Navbar({ onLogout }) {
               Chat
             </Link>
           </li>
+          <li className="nav-item">
+            <a href="" className="nav-link" onClick={onLogout}>
+              Logout
+            </a>
+          </li>
         </ul>
-          <a href="" className="logout" onClick={onLogout}>
-                            <FontAwesomeIcon className="i" icon={["fa", "sign-out-alt"]} />
-                        </a>
-        </div>
+      </div>
     </nav>
   );
 }

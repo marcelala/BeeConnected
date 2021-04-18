@@ -101,30 +101,29 @@ export default function PostCard({ post, onDeleteClick }) {
   ));
 
   return (
-    <div className="postCard container">
-      <div className="avatar container">
-        <h2>avatar goes here</h2>
+    <div className="postCard">
+      <div className="postCard__content">
+        <h2 className="postCard__content-heading">{post.title}</h2>
+        <p>{post.body}</p>
       </div>
-      <div className="card-title">
-        <h2>{post.title}</h2>
-      </div>
-      <div className="card-body">
-        <h4>{post.body}</h4>
-        <p>{post.postOwner}</p>
-      </div>
+
+      <p className="postCard--user">{post.postOwner}</p>
       {userCheck() && (
         <div>
-          <button className="btn delete" type="button" onClick={onDeleteClick}>
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              toggleEdit ? setToggleEdit(false) : setToggleEdit(true)
-            }
-          >
-            Edit
-          </button>
+          <div className="postCard__editDelete">
+            <button className="btn" type="button" onClick={onDeleteClick}>
+              Delete
+            </button>
+            <button
+              className="btn"
+              type="button"
+              onClick={() =>
+                toggleEdit ? setToggleEdit(false) : setToggleEdit(true)
+              }
+            >
+              Edit
+            </button>
+          </div>
           {toggleEdit && (
             <EditPost
               onSubmit={(postData) => updatePost(postData)}
@@ -133,26 +132,28 @@ export default function PostCard({ post, onDeleteClick }) {
           )}
         </div>
       )}
-      <div className="date">{date()}</div>
-      <div className="comment-icon">
-        <div>{comments.length}</div>
+      <div className="postCard__comments">
         <button
+          className="postCard__comments-btn"
           type="button"
           onClick={() =>
             toggleComments ? setToggleComments(false) : setToggleComments(true)
           }
         >
-          Comments
+          Comments {comments.length}
         </button>
       </div>
+
+      <div className="postCard--date">{date()}</div>
+
       {toggleComments && (
-        <div>
-          <div className="comments-form">
+        <div className="commentCard-container">
+          <div>{CommentsArray}</div>
+          <div className="commentCard__commentForm">
             <NewCommentForm
               onSubmit={(commentData) => createComment(commentData)}
             />
           </div>
-          <div className="comments-container">{CommentsArray}</div>
         </div>
       )}
     </div>

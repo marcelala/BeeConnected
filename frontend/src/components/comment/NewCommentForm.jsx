@@ -16,18 +16,18 @@ export default function NewCommentForm({ onSubmit }) {
   //<NewPostForm onSubmit={(postData) => createPost(postData)} />;
 
   return (
-    <form className="card new-comment">
-      <div className="form-group">
-        <div className="form-body">
+    <form>
+      <div>
+        <div>
           <textarea
-            className="form-control"
+            placeholder="Your comment here"
             value={body}
             onChange={(e) => setBody(e.target.value)}
           />
         </div>
       </div>
-      <div className="form-group">
-        <button className="btn post comment" onClick={handleSubmit}>
+      <div>
+        <button className="btn" onClick={handleSubmit}>
           Comment
         </button>
       </div>

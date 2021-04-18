@@ -24,9 +24,10 @@ public class AuthService {
     private static final Logger logger = LoggerFactory.getLogger("AuthService");
 
     public String getLoggedInUserEmail() {
-        Object maybeUserDetails = SecurityContextHolder.getContext().getAuthentication().getDetails();
-        if (maybeUserDetails instanceof UserDetails) {
-            return ((UserDetails) maybeUserDetails).getUsername();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        if (principal instanceof UserDetails) {
+            return ((UserDetails) principal).getUsername();
         }
         return null;
     }
@@ -38,9 +39,8 @@ public class AuthService {
     }
 
     public String authenticate(String email, String password) throws AuthenticationException {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(email, password)
-        );
+        Authentication authentication = authenticationManager
+                .authenticate(new UsernamePasswordAuthenticationToken(email, password));
 
         return createAuthToken(email);
     }

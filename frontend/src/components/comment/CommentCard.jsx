@@ -40,23 +40,28 @@ export default function CommentCard({ comment, onDeleteClick, user }) {
   }
 
   return (
-    <div className="commentCard container">
-      {/* <div className="avatar container">
-      <h2>avatar goes here</h2>
-      </div> */}
+    <div className="commentCard">
+      <div className="commentCard__content">
+        <p>{comment.body}</p>
+        <p className="commentCard--user">{comment.userCommentOwner}</p>
+      </div>
+      <div className="commentCard--date">{date()}</div>
       {userCheck() && (
         <div>
-          <button className="btn delete" type="button" onClick={onDeleteClick}>
-            Delete
-          </button>
-          <button
-            type="button"
-            onClick={() =>
-              toggleEdit ? setToggleEdit(false) : setToggleEdit(true)
-            }
-          >
-            Edit
-          </button>
+          <div className="commentCard__editDelete">
+            <button className="btn" type="button" onClick={onDeleteClick}>
+              Delete
+            </button>
+            <button
+              className="btn"
+              type="button"
+              onClick={() =>
+                toggleEdit ? setToggleEdit(false) : setToggleEdit(true)
+              }
+            >
+              Edit
+            </button>
+          </div>
           {toggleEdit && (
             <EditComment
               onSubmit={(commentData) => updateComment(commentData)}
@@ -65,11 +70,6 @@ export default function CommentCard({ comment, onDeleteClick, user }) {
           )}
         </div>
       )}
-      <div className="card-body">
-        <h4>{comment.body}</h4>
-        <p>{comment.userCommentOwner}</p>
-      </div>
-      <div className="date">{date()}</div>
     </div>
   );
 }

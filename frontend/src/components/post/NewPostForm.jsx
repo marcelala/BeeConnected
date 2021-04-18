@@ -17,25 +17,27 @@ export default function PostForm({ onSubmit }) {
   };
 
   return (
-    <form className="card new-post">
-      <div className="form-group">
-        <div className="form-title">
-          <input
-            className="form-control"
-            value={title}
-            onChange={(e) => setTitle(e.target.value)}
-          />
-        </div>
-        <div className="form-body">
-          <textarea
-            className="form-control"
-            value={body}
-            onChange={(e) => setBody(e.target.value)}
-          />
-        </div>
+    <form>
+      <div>
+        <input
+          className="postForm__input"
+          placeholder="Title of post"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          type="text"
+        />
       </div>
-      <div className="form-group">
-        <button className="btn post" onClick={handleSubmit}>
+      <div>
+        <textarea
+          className="postForm__input"
+          placeholder="Whats on your mind?"
+          value={body}
+          onChange={(e) => setBody(e.target.value)}
+          type="text"
+        />
+      </div>
+      <div>
+        <button className="btn" onClick={handleSubmit}>
           Post
         </button>
       </div>
