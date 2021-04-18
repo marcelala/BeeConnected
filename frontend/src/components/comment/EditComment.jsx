@@ -24,7 +24,7 @@ export default function EditComment({ onSubmit, comment }) {
       </div>
       <div className="form-group">
         <button className="btn post comment" onClick={handleSubmit}>
-          Edit
+          Update
         </button>
       </div>
     </form>
