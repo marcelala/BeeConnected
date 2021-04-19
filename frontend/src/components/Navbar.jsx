@@ -29,11 +29,11 @@ export default function Navbar({ onLogout }) {
               Forum
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="/chat" className="nav-link">
               Chat
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <a href="" className="nav-link" onClick={onLogout}>
               Logout
