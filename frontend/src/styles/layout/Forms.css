@@ -9,6 +9,7 @@ textarea {
   font-family: "Montserrat", sans-serif;
   font-size: 1.6rem;
   max-width: 600px;
+  border-radius: 10px;
 }
 
 .postForm__input[type="text"] {
