@@ -7,6 +7,7 @@ import RegisterForm from "./RegisterForm";
 import Auth from "../../services/Auth";
 import Footer from "../../components/Footer";
 import Logo from "../../assets/BeeConnected.png";
+import Hive from "../../assets/Hive.jpg";
 
 export default function LoginPage() {
   const [signIn, setSignIn] = useState(false);
@@ -39,31 +40,58 @@ export default function LoginPage() {
           </ul>
         </div>
       </nav>
-      <section>
+      <section className="authPage-container">
         {signIn && (
-          <div>
-            <LoginForm onSubmit={login} />
-            <h2>Dont have an account?</h2>
-            <button
-              className="btn"
-              type="button"
-              onClick={() => (signIn ? setSignIn(false) : setSignIn(true))}
-            >
-              Sign Up
-            </button>
+          <div className="authPage">
+            <div>
+              <img src={Hive} className="authPage--hive" alt="Hive"></img>
+            </div>
+
+            <div>
+              <img src={Logo} className="authPage--logo" alt="bees" />
+              <h2>Welcome to our Community</h2>
+              <p>
+                This community aims to help immigrants connect with local
+                mentors if you’re looking for guidance in your career, language
+                learning or just want to learn some new skills.
+              </p>
+              <LoginForm onSubmit={login} />
+              <h2>Dont have an account?</h2>
+
+              <button
+                className="btn"
+                type="button"
+                onClick={() => (signIn ? setSignIn(false) : setSignIn(true))}
+              >
+                Sign Up
+              </button>
+            </div>
           </div>
         )}
         {!signIn && (
-          <div className="col-12 mt-4">
-            <RegisterForm onSubmit={register} />
-            <h2>Already a user?</h2>
-            <button
-              className="btn"
-              type="button"
-              onClick={() => (signIn ? setSignIn(false) : setSignIn(true))}
-            >
-              Sign In
-            </button>
+          <div className="authPage">
+            <div>
+              <img src={Hive} className="authPage--hive" alt="Hive"></img>
+            </div>
+
+            <div>
+              <img src={Logo} className="authPage--logo" alt="bees" />
+              <h2>Welcome to our Community</h2>
+              <p>
+                This community aims to help immigrants connect with local
+                mentors if you’re looking for guidance in your career, language
+                learning or just want to learn some new skills.
+              </p>
+              <RegisterForm onSubmit={register} />
+              <h2>Already a user?</h2>
+              <button
+                className="btn"
+                type="button"
+                onClick={() => (signIn ? setSignIn(false) : setSignIn(true))}
+              >
+                Sign In
+              </button>
+            </div>
           </div>
         )}
       </section>

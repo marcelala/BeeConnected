@@ -52,6 +52,7 @@ export default function CommentCard({ comment, onDeleteClick, user }) {
             <button className="btn" type="button" onClick={onDeleteClick}>
               Delete
             </button>
+            <p className="commentCard__editDelete--heading"></p>
             <button
               className="btn"
               type="button"

@@ -10,3 +10,5 @@
 @import "./components/Button.css";
 @import "./layout/LoginForm.css";
 @import "./layout/RegisterForm.css";
+@import "./pages/homePage.css";
+@import "./pages/authPage.css";

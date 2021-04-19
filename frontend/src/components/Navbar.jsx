@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 
 //Project files
 import Logo from "../assets/BeeConnected.png";
-import Auth from "../services/Auth";
 
 export default function Navbar({ onLogout }) {
   // Components
