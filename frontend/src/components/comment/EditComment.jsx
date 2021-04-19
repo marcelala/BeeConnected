@@ -15,7 +15,7 @@ export default function EditComment({ onSubmit, comment }) {
       <div>
         <div>
           <textarea
-            className="form-control"
+            className="editComment"
             value={body}
             onChange={(e) => setBody(e.target.value)}
             type="text"
@@ -23,7 +23,11 @@ export default function EditComment({ onSubmit, comment }) {
         </div>
       </div>
       <div className="form-group">
-        <button className="btn post comment" type="button" onClick={handleSubmit}>
+        <button
+          className="btn post comment"
+          type="submit"
+          onClick={handleSubmit}
+        >
           Update
         </button>
       </div>

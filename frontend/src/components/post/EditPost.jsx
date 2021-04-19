@@ -32,7 +32,7 @@ export default function EditForm({ onSubmit, post }) {
         </div>
       </div>
       <div>
-        <button className="btn" onClick={handleSubmit}>
+        <button className="btn" type="submit" onClick={handleSubmit}>
           Update
         </button>
       </div>

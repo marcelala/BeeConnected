@@ -14,8 +14,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AuthPage from "./pages/auth/AuthPage";
 import Forum from "./pages/forum/Forum";
-import PostsPage from "./pages/posts/PostsPage";
-import ChatPage from "./pages/chat/ChatPage";
+
 import Home from "./pages/home/Home";
 import "./styles/App.css";
 //import icons to library
@@ -36,10 +35,6 @@ export default function App() {
         <Switch>
           <Route path="/forum">
             <Forum />
-          </Route>
-
-          <Route path="/chat">
-            <ChatPage />
           </Route>
 
           <Route path="/">

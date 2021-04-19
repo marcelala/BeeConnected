@@ -56,7 +56,7 @@ export default function LoginPage() {
                 learning or just want to learn some new skills.
               </p>
               <LoginForm onSubmit={login} />
-              <h2>Dont have an account?</h2>
+              <h2>Don't have an account?</h2>
 
               <button
                 className="btn"

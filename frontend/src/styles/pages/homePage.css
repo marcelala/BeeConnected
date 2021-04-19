@@ -1,0 +1,30 @@
+.homePage {
+  text-align: left;
+  padding: 2rem;
+}
+
+.homePage--heading {
+  text-align: center;
+}
+
+.homePage--welcome {
+  text-align: center;
+  padding-bottom: 2rem;
+}
+
+.homePage--subHeading {
+  text-align: center;
+  padding: 2rem;
+}
+
+.homePage__list {
+  list-style: disc;
+  font-size: 1.4rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.homePage__list--item {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
