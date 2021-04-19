@@ -108,7 +108,24 @@ export default function PostCard({ post, onDeleteClick }) {
         <h2 className="postCard__content-heading">{post.title}</h2>
         <p>{post.body}</p>
       </div>
-
+      <div className="postCard__comments">
+      <div className="postCard__comments-btn">
+        <div className="postCard__comments-icon">
+          <FontAwesomeIcon className="comments-icon" icon={["fa", "comments"]} onClick={() =>
+            toggleComments ? setToggleComments(false) : setToggleComments(true)
+          }/>
+          </div>
+          </div>
+        
+        {/* <button
+          className="postCard__comments-btn"
+          type="button"
+          onClick={() =>
+            toggleComments ? setToggleComments(false) : setToggleComments(true)
+          }
+        > */}{comments.length}
+        {/* </button> */}
+      </div>
       <p className="postCard--user">{post.postOwner}</p>
       {userCheck() && (
         <div>
@@ -137,17 +154,8 @@ export default function PostCard({ post, onDeleteClick }) {
           )}
         </div>
       )}
-      <div className="postCard__comments">
-        <button
-          className="postCard__comments-btn"
-          type="button"
-          onClick={() =>
-            toggleComments ? setToggleComments(false) : setToggleComments(true)
-          }
-        >
-          Comments {comments.length}
-        </button>
-      </div>
+
+
 
       <div className="postCard--date">{date()}</div>
 
