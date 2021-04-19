@@ -1,0 +1,9 @@
+:root {
+  --dark-brown: #53361c;
+  --dark-brown-transparent: rgba(95, 63, 16, 0.575);
+  --off-white: rgba(251, 242, 215, 1);
+  --dark-beige: rgba(154, 125, 22, 1);
+  --beige: rgba(208, 174, 108, 0.71);
+  --beige-light: #d0ae6c82;
+  --beige-transparent: rgba(208, 174, 108, 0.51);
+}

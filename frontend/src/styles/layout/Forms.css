@@ -1,0 +1,40 @@
+input[type="text"],
+textarea {
+  background-color: var(--off-white);
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  max-width: 600px;
+}
+
+.postForm__input[type="text"] {
+  background-color: var(--beige-transparent);
+}
+
+input[type="email"] {
+  background-color: var(--off-white);
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  max-width: 600px;
+}
+
+input[type="password"] {
+  background-color: var(--off-white);
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  margin-top: 1rem;
+  border-radius: 4px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.6rem;
+  max-width: 600px;
+}

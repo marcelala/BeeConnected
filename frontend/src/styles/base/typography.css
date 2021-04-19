@@ -1,0 +1,18 @@
+html,
+body {
+  font-family: "Montserrat", sans-serif;
+  color: var(--dark-brown);
+}
+
+p {
+  font-size: 1.6rem;
+}
+
+h2 {
+  font-size: 2rem;
+  padding: 1rem;
+}
+
+h5 {
+  font-size: 0.8rem;
+}
