@@ -30,7 +30,8 @@ export default function LoginForm({ onSubmit }) {
 
         <div className="form-group">
           <button
-            className="btn btn-info"
+            className="btn btn-info" 
+            type="button"
             onClick={() => onSubmit({ email, password })}
           >
             Login

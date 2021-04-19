@@ -42,6 +42,7 @@ export default function RegisterForm({ onSubmit }) {
         <div className="form-group">
           <button
             className="btn btn-success"
+            type="button"
             onClick={(e) => onSubmit({ name, email, password })}
           >
             Create account
