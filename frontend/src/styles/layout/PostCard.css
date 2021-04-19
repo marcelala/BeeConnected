@@ -11,6 +11,8 @@
 .postCard__editDelete {
   display: flex;
   /* justify-content: space-between; */
+  margin-top: -6rem;
+  margin-bottom: 3rem;
 }
 
 .postCard__comments {
