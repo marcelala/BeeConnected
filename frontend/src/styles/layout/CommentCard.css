@@ -6,10 +6,15 @@
   /* border-radius: 4px; */
   margin-top: 1rem;
   margin-bottom: 3rem;
-  width: 80%;
+  width: 95%;
   margin-left: auto;
   margin-right: auto;
-  
+}
+
+@media (min-width: 34.375em) {
+  .commentCard-container {
+    width: 80%;
+  }
 }
 
 .commentCard {
@@ -22,7 +27,6 @@
   margin-bottom: 3rem;
   font-family: "Montserrat", sans-serif;
   border-radius: 16px;
-
 }
 
 .commentCard__editDelete {
@@ -30,7 +34,7 @@
   /* justify-content: space-between; */
 }
 
-.commentCard__Delete{
+.commentCard__Delete {
   background: none;
   color: var(--dark-brown);
   display: inline-block;
@@ -80,7 +84,6 @@
   font-size: 1rem;
   color: var(--dark-brown);
   padding: 1rem;
-
 }
 
 .commentCard--date {
