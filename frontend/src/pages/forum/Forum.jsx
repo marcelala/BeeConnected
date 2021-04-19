@@ -6,11 +6,18 @@ import PostsApi from "../../api/PostsApi";
 import PostCard from "../../components/post/PostCard";
 import NewPostForm from "../../components/post/NewPostForm";
 
-export default function HomePage() {
+export default function Forum() {
   // Local state
   const [posts, setPosts] = useState([]);
 
   // Methods
+
+  useEffect(() => {
+    PostsApi.getAllPosts()
+      .then(({ data }) => setPosts(data))
+      .catch((err) => console.error(err));
+  }, [setPosts]);
+
   async function createPost(postData) {
     try {
       const response = await PostsApi.createPost(postData);
@@ -34,13 +41,8 @@ export default function HomePage() {
     }
   }
 
-  useEffect(() => {
-    PostsApi.getAllPosts()
-      .then(({ data }) => setPosts(data))
-      .catch((err) => console.error(err));
-  }, [setPosts]);
-
   // Components
+
   const PostsArray = posts.map((post) => (
     <PostCard
       key={post.id}
@@ -50,11 +52,11 @@ export default function HomePage() {
   ));
 
   return (
-    <div className="container">
-      <div className="container newPost">
+    <section>
+      <div>
         <NewPostForm onSubmit={(postData) => createPost(postData)} />
       </div>
-      <div className="posts">{PostsArray}</div>
-    </div>
+      <div>{PostsArray}</div>
+    </section>
   );
 }

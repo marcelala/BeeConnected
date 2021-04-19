@@ -3,12 +3,26 @@ import React, { useEffect, useState } from "react";
 import CommentsApi from "../../api/CommentsApi";
 import CommentCard from "../comment/CommentCard";
 import NewCommentForm from "../comment/NewCommentForm";
+import UserApi from "../../api/UserApi";
+import EditPost from "./EditPost";
+import PostsApi from "../../api/PostsApi";
 
 export default function PostCard({ post, onDeleteClick }) {
   // Local state
   const [comments, setComments] = useState([]);
+  const [toggleComments, setToggleComments] = useState(false);
+  const [toggleEdit, setToggleEdit] = useState(false);
+  const [user, setUser] = useState({});
 
-  console.log(comments);
+  // Methods
+
+  useEffect(() => {
+    UserApi.getUser()
+      .then(({ data }) => {
+        setUser(data);
+      })
+      .catch((err) => console.error(err));
+  }, [setUser]);
 
   useEffect(() => {
     CommentsApi.getCommentByPostId(post.id)
@@ -17,12 +31,6 @@ export default function PostCard({ post, onDeleteClick }) {
       })
       .catch((err) => console.error(err));
   }, [setComments]);
-
-  // Components;
-
-  const CommentsArray = comments.map((comment) => (
-    <CommentCard key={comment.id} comment={comment} />
-  ));
 
   async function createComment(commentData) {
     console.log(commentData);
@@ -37,30 +45,117 @@ export default function PostCard({ post, onDeleteClick }) {
     }
   }
 
+  async function deleteComment(comment) {
+    try {
+      await CommentsApi.deleteComment(comment.id);
+      const newComments = comments.filter((c) => c.id !== comment.id);
+
+      setComments(newComments);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function userCheck() {
+    if (post.postOwner === user.email) {
+      return true;
+    }
+    return false;
+  }
+
+  async function updatePost(updatedPost) {
+    try {
+      await PostsApi.updatePost(post.id, updatedPost);
+    } catch (e) {
+      console.error(e);
+    }
+  }
+
+  function dateCreatedOrUpdatedCheck() {
+    if (post.created === null) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  function date() {
+    if (dateCreatedOrUpdatedCheck()) {
+      const createDate = post.created.substring(0, 10);
+      return `Created: ${createDate}`;
+    } else {
+      const updateDate = post.updated.substring(0, 10);
+      return `Updated: ${updateDate}`;
+    }
+  }
+
+  // Components;
+
+  const CommentsArray = comments.map((comment) => (
+    <CommentCard
+      key={comment.id}
+      comment={comment}
+      onDeleteClick={() => deleteComment(comment)}
+      user={user}
+    />
+  ));
+
   return (
-    <div className="postCard container">
-      <div className="avatar container">
-        <h2>avatar goes here</h2>
+    <div className="postCard">
+      <div className="postCard__content">
+        <h2 className="postCard__content-heading">{post.title}</h2>
+        <p>{post.body}</p>
       </div>
-      <div className="card-title">
-        <h2>{post.title}</h2>
+
+      <p className="postCard--user">{post.postOwner}</p>
+      {userCheck() && (
+        <div>
+          <div className="postCard__editDelete">
+            <button className="btn" type="button" onClick={onDeleteClick}>
+              Delete
+            </button>
+            <button
+              className="btn"
+              type="button"
+              onClick={() =>
+                toggleEdit ? setToggleEdit(false) : setToggleEdit(true)
+              }
+            >
+              Edit
+            </button>
+          </div>
+          {toggleEdit && (
+            <EditPost
+              onSubmit={(postData) => updatePost(postData)}
+              post={post}
+            />
+          )}
+        </div>
+      )}
+      <div className="postCard__comments">
+        <button
+          className="postCard__comments-btn"
+          type="button"
+          onClick={() =>
+            toggleComments ? setToggleComments(false) : setToggleComments(true)
+          }
+        >
+          Comments {comments.length}
+        </button>
       </div>
-      <div className="card-body">
-        <h4>{post.body}</h4>
-      </div>
-      <button className="btn delete" onClick={onDeleteClick}>
-        ...
-      </button>
-      <div className="date">Date and time created</div>
-      <div className="comment-icon">
-        icon for comments that expands the container and displays past comments
-      </div>
-      <div className="comments-form">
-        <NewCommentForm
-          onSubmit={(commentData) => createComment(commentData)}
-        />
-      </div>
-      <div className="comments-container">{CommentsArray}</div>
+
+      <div className="postCard--date">{date()}</div>
+
+      {toggleComments && (
+        <div className="commentCard-container">
+          <div>{CommentsArray}</div>
+          <div className="commentCard__commentForm">
+            <NewCommentForm
+              onSubmit={(commentData) => createComment(commentData)}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }

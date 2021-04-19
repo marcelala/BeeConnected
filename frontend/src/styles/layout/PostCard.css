@@ -1,0 +1,53 @@
+.postCard {
+  background: var(--beige);
+  padding: 1rem;
+  position: relative;
+  box-shadow: 0 1.5rem 2rem rgba(54, 57, 59, 0.2);
+  border-radius: 4px;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.postCard__editDelete {
+  display: flex;
+  justify-content: space-between;
+}
+
+.postCard__comments {
+  text-align: right;
+}
+
+.postCard__comments-btn {
+  border: none;
+  font-size: 1.2rem;
+  padding: 0.5rem;
+
+  cursor: pointer;
+  border-radius: 6px;
+  background-color: var(--off-white);
+}
+
+.postCard__content-heading {
+  padding-top: 0;
+}
+
+.postCard__content {
+  background: var(--off-white);
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.postCard--user {
+  position: absolute;
+  left: 0.6rem;
+  top: 0.4rem;
+  font-size: 1rem;
+}
+
+.postCard--date {
+  position: absolute;
+  right: 0.6rem;
+  top: 0.4rem;
+  font-size: 1rem;
+}

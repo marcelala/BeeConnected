@@ -1,5 +1,5 @@
 // NPM Packages
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
 // import fontawesome components
@@ -13,10 +13,11 @@ import Auth from "./services/Auth";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AuthPage from "./pages/auth/AuthPage";
-import HomePage from "./pages/home/HomePage";
+import Forum from "./pages/forum/Forum";
 import PostsPage from "./pages/posts/PostsPage";
 import ChatPage from "./pages/chat/ChatPage";
-import './styles/App.css';
+import Home from "./pages/home/Home";
+import "./styles/App.css";
 //import icons to library
 library.add(fab, far, fas);
 
@@ -29,14 +30,12 @@ export default function App() {
 
   // Components
   const loggedInRouter = (
-    <div className="main">
-    <BrowserRouter>
-      <Navbar onLogout={() => Auth.logout()} />
-
-      <div className="container route">
+    <div className="container">
+      <BrowserRouter>
+        <Navbar onLogout={() => Auth.logout()} />
         <Switch>
-          <Route path="/posts">
-            <PostsPage />
+          <Route path="/forum">
+            <Forum />
           </Route>
 
           <Route path="/chat">
@@ -44,12 +43,12 @@ export default function App() {
           </Route>
 
           <Route path="/">
-            <HomePage />
+            <Home />
           </Route>
         </Switch>
-        <Footer/>
-      </div>
-    </BrowserRouter>
+
+        <Footer />
+      </BrowserRouter>
     </div>
   );
 

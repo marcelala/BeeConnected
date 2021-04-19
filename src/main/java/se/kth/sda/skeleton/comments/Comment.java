@@ -1,11 +1,15 @@
 package se.kth.sda.skeleton.comments;
 
+import java.util.Date;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
@@ -23,6 +27,8 @@ public class Comment {
     private Long id;
 
     private String body;
+    private Date created;
+    private Date updated;
 
     @ManyToOne
     @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
@@ -38,13 +44,21 @@ public class Comment {
     @NotNull
     private User userCommentOwner;
 
+    @PrePersist
+    protected void onCreate() {
+        created = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updated = new Date();
+    }
+
     public Comment() {
     }
 
     public Comment(String body) {
-
         this.body = body;
-
     }
 
     public Long getId() {
@@ -77,6 +91,22 @@ public class Comment {
 
     public void setUserCommentOwner(User userCommentOwner) {
         this.userCommentOwner = userCommentOwner;
+    }
+
+    public Date getCreated() {
+        return this.created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
+    }
+
+    public Date getUpdated() {
+        return this.updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
     }
 
 }

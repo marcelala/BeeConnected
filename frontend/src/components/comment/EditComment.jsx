@@ -1,34 +1,30 @@
 import React from "react";
 
-export default function NewCommentForm({ onSubmit }) {
-  const [body, setBody] = React.useState("");
+export default function EditComment({ onSubmit, comment }) {
+  const [body, setBody] = React.useState(comment.body);
 
   const handleSubmit = () => {
     // Invoke the passed in event callback
     onSubmit({
       body: body,
     });
-
-    // Clear the input field
-    setBody("");
   };
-
-  //<NewPostForm onSubmit={(postData) => createPost(postData)} />;
 
   return (
     <form>
       <div>
         <div>
           <textarea
-            placeholder="Your comment here"
+            className="form-control"
             value={body}
             onChange={(e) => setBody(e.target.value)}
+            type="text"
           />
         </div>
       </div>
-      <div>
-        <button className="btn" onClick={handleSubmit}>
-          Comment
+      <div className="form-group">
+        <button className="btn post comment" onClick={handleSubmit}>
+          Update
         </button>
       </div>
     </form>
