@@ -1,4 +1,4 @@
-package se.kth.sda.skeleton.chat.chatServer.repository;
+package se.kth.sda.skeleton.chat.chatServer;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

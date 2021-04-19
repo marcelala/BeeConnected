@@ -1,5 +1,16 @@
 package se.kth.sda.skeleton.chat.chatServer.message;
 
+import se.kth.sda.skeleton.chat.chatServer.repository.Message;
+import se.kth.sda.skeleton.chat.chatServer.repository.MessageRepository;
+
+import org.springframework.stereotype.Service;
+import org.springframework.web.util.HtmlUtils;
+
+import java.time.LocalDateTime;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.StreamSupport;
+
 import static java.util.stream.Collectors.toList;
 
 @Service

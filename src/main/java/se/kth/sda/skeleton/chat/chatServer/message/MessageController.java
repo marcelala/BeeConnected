@@ -10,6 +10,7 @@ import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
+
 public class MessageController {
 
     private final MessageService messageService;
