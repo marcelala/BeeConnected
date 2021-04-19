@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 import CommentsApi from "../../api/CommentsApi";
 import CommentCard from "../comment/CommentCard";
@@ -106,14 +108,34 @@ export default function PostCard({ post, onDeleteClick }) {
         <h2 className="postCard__content-heading">{post.title}</h2>
         <p>{post.body}</p>
       </div>
-
+      <div className="postCard__comments">
+      <div className="postCard__comments-btn">
+        <div className="postCard__comments-icon">
+          <FontAwesomeIcon className="comments-icon" icon={["fa", "comments"]} onClick={() =>
+            toggleComments ? setToggleComments(false) : setToggleComments(true)
+          }/>
+          </div>
+          </div>
+        
+        {/* <button
+          className="postCard__comments-btn"
+          type="button"
+          onClick={() =>
+            toggleComments ? setToggleComments(false) : setToggleComments(true)
+          }
+        > */}{comments.length}
+        {/* </button> */}
+      </div>
       <p className="postCard--user">{post.postOwner}</p>
       {userCheck() && (
         <div>
           <div className="postCard__editDelete">
-            <button className="btn" type="button" onClick={onDeleteClick}>
+          <div className="commentCard__Delete">
+          <FontAwesomeIcon className="delete" icon={["fa", "trash-alt"]} onClick={onDeleteClick}/>
+          </div>
+            {/* <button className="btn" type="button" onClick={onDeleteClick}>
               Delete
-            </button>
+            </button> */}
             <button
               className="btn"
               type="button"
@@ -132,17 +154,8 @@ export default function PostCard({ post, onDeleteClick }) {
           )}
         </div>
       )}
-      <div className="postCard__comments">
-        <button
-          className="postCard__comments-btn"
-          type="button"
-          onClick={() =>
-            toggleComments ? setToggleComments(false) : setToggleComments(true)
-          }
-        >
-          Comments {comments.length}
-        </button>
-      </div>
+
+
 
       <div className="postCard--date">{date()}</div>
 

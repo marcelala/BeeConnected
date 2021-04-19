@@ -1,31 +1,51 @@
 .postCard {
-  background: var(--beige);
+  background: var(--beige-transparent);
   padding: 1rem;
   position: relative;
   box-shadow: 0 1.5rem 2rem rgba(54, 57, 59, 0.2);
-  border-radius: 4px;
+  border-radius: 16px;
   margin-top: 1rem;
   margin-bottom: 3rem;
 }
 
 .postCard__editDelete {
   display: flex;
-  justify-content: space-between;
+  /* justify-content: space-between; */
+  margin-top: -6rem;
+  margin-bottom: 3rem;
 }
 
 .postCard__comments {
   text-align: right;
-}
-
-.postCard__comments-btn {
-  border: none;
   font-size: 1.2rem;
-  padding: 0.5rem;
-
-  cursor: pointer;
-  border-radius: 6px;
-  background-color: var(--off-white);
+  margin-right: 3rem;
+  margin-top: 2rem;
 }
+
+.postCard__comments-icon {
+  background: none;
+  color: var(--dark-brown);
+  display: inline-block;
+  padding: 0.5rem 1.5rem;
+  font-size: 1.6rem;
+  margin: 1rem;
+  cursor: pointer;
+  width: 1rem;
+  height: 1rem;
+  transition: color 0.5s;
+  cursor: pointer;
+  /* background-color: var(--off-white); */
+}
+.postCard__comments-icon:hover {
+  color: var(--beige-light);
+}
+
+.comments-icon{
+  width: 4rem;
+  height: 4rem;
+  font-size: 3rem;
+}
+
 
 .postCard__content-heading {
   padding-top: 0;
@@ -33,9 +53,13 @@
 
 .postCard__content {
   background: var(--off-white);
-  margin-top: 2rem;
+  margin-top: 4rem;
   margin-bottom: 1rem;
+  margin-right: 2rem;
+  margin-left: 1rem;
   padding: 1rem;
+  border-radius: 8px;
+  width: 95%;
 }
 
 .postCard--user {
@@ -43,6 +67,9 @@
   left: 0.6rem;
   top: 0.4rem;
   font-size: 1rem;
+  padding: .5rem;
+  margin-left: 2rem;
+  margin-top: 1rem;
 }
 
 .postCard--date {
@@ -50,4 +77,8 @@
   right: 0.6rem;
   top: 0.4rem;
   font-size: 1rem;
+  padding: .5rem;
+  margin-right: 4rem;
+  margin-left: 1rem;
+  margin-top: 1rem;
 }

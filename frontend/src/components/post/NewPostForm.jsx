@@ -18,7 +18,8 @@ export default function PostForm({ onSubmit }) {
 
   return (
     <form>
-      <div>
+      <div className="postForm">
+        <div>
         <input
           className="postForm__input"
           placeholder="Title of post"
@@ -40,6 +41,7 @@ export default function PostForm({ onSubmit }) {
         <button className="btn" type="button" onClick={handleSubmit}>
           Post
         </button>
+      </div>
       </div>
     </form>
   );

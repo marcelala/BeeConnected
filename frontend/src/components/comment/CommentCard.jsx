@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 
 import EditComment from "./EditComment";
 import CommentsApi from "../../api/CommentsApi";
@@ -49,9 +51,13 @@ export default function CommentCard({ comment, onDeleteClick, user }) {
       {userCheck() && (
         <div>
           <div className="commentCard__editDelete">
+          <div className="commentCard__Delete">
+          <FontAwesomeIcon className="delete" icon={["fa", "trash-alt"]} onClick={onDeleteClick}/>
+        </div>
+{/* 
             <button className="btn" type="button" onClick={onDeleteClick}>
               Delete
-            </button>
+            </button> */}
             <p className="commentCard__editDelete--heading"></p>
             <button
               className="btn"
