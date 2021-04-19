@@ -23,6 +23,8 @@
 .authPage--logo {
   display: none;
   width: 300px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 @media (min-width: 60.875em) {

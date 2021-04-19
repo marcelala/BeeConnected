@@ -13,6 +13,11 @@ h2 {
   padding: 1rem;
 }
 
+h3 {
+  font-size: 1.8rem;
+  padding: 0.5rem;
+}
+
 h5 {
   font-size: 0.8rem;
 }

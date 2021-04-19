@@ -14,34 +14,35 @@ export default function PostForm({ onSubmit }) {
 
     // Clear the input field
     setBody("");
+    setTitle("");
   };
 
   return (
     <form>
       <div className="postForm">
         <div>
-        <input
-          className="postForm__input"
-          placeholder="Title of post"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div>
-        <textarea
-          className="postForm__input"
-          placeholder="Whats on your mind?"
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
-          type="text"
-        />
-      </div>
-      <div>
-        <button className="btn" type="button" onClick={handleSubmit}>
-          Post
-        </button>
-      </div>
+          <input
+            className="postForm__input"
+            placeholder="Title of post"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+          />
+        </div>
+        <div>
+          <textarea
+            className="postForm__input"
+            placeholder="Whats on your mind?"
+            value={body}
+            onChange={(e) => setBody(e.target.value)}
+            type="text"
+          />
+        </div>
+        <div>
+          <button className="btn" type="button" onClick={handleSubmit}>
+            Post
+          </button>
+        </div>
       </div>
     </form>
   );
