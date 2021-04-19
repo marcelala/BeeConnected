@@ -1,0 +1,43 @@
+import React from 'react';
+import PropTypes from 'prop-types';
+import {makeStyles} from '@material-ui/core/styles';
+import InputFieldWithSubmitButton from '../../components/InputFieldWithSubmitButton';
+
+const useStyles = makeStyles(() => ({
+  container: {
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    height: '200px',
+    margin: '1rem'
+  }
+}));
+
+function Login({onConnect}) {
+
+  const classes = useStyles();
+
+  const connect = (userName) => {
+    onConnect(userName);
+  };
+
+  return (
+    <div className={classes.container} data-testid="login">
+      <h1>Chat - Login</h1>
+      <InputFieldWithSubmitButton
+        id="user-name-field"
+        label="User name"
+        buttonValue="Connect"
+        onSubmit={connect}
+      />
+    </div>
+  );
+}
+
+Login.propTypes = {
+  onConnect: PropTypes.func.isRequired
+};
+
+Login.defaultProps = {};
+
+export default Login;
