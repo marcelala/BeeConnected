@@ -1,3 +1,15 @@
+/**
+ * This class implements the controller functionality for posts
+ * <p>
+ *  This class outlines the HTTP methods, paths and requests
+ *  Persistence is implemented using Hibernate annotations
+ *
+ *
+ * </p>
+ * @author Nicholas Hartman, Marcela Felix Fortis and Sujan Varma
+ * @version 1.0
+ *
+ */
 package se.kth.sda.skeleton.posts;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +24,10 @@ import se.kth.sda.skeleton.user.UserService;
 import java.security.Principal;
 import java.util.List;
 
+
 @RequestMapping("/posts")
 @RestController
+
 public class PostController {
 
     PostRepository postRepository;
@@ -21,6 +35,12 @@ public class PostController {
     UserService userService;
     CommentRepository commentRepository;
 
+    /**
+     *
+     * @param postRepository
+     * @param postService
+     * @param userService
+     */
     @Autowired
     public PostController(PostRepository postRepository, PostService postService, UserService userService) {
         this.postRepository = postRepository;
@@ -29,12 +49,22 @@ public class PostController {
     }
 
     // Return all posts.
+
+    /**
+     *
+     * @return
+     */
     @GetMapping
     public List<Post> listAllPosts() {
         List<Post> posts = postRepository.findAll();
         return posts;
     }
 
+    /**
+     *
+     * @param id
+     * @return
+     */
     // Return a specific post based on the postId.
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPost(@PathVariable Long id) {
@@ -42,6 +72,12 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
+    /**
+     *
+     * @param post
+     * @param principal
+     * @return
+     */
     // Create a new post on User given by Logged In User
     @PostMapping
     public ResponseEntity<Post> createUserPost(@RequestBody Post post, Principal principal) {
@@ -53,6 +89,13 @@ public class PostController {
 
     }
 
+    /**
+     *
+     * @param id
+     * @param updatedPost
+     * @param principal
+     * @return
+     */
     // Update the post based on the provided postId
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost, Principal principal) {
@@ -60,6 +103,11 @@ public class PostController {
         return ResponseEntity.ok(post);
     }
 
+    /**
+     *
+     * @param id
+     * @param principal
+     */
     // Delete the post based on the provided postId.
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

@@ -1,5 +1,16 @@
 # SDA starter template
 
+##Introduction
+This online forum was developed during the Software Development Academy (SDA) so that we could gain more experience
+with developing and deploying a fullstack application. We worked in groups using Slack for messaging purposes and GIT 
+and GitHub to collaborate and manage our code and the implementation. 
+
+##App description
+As foreigners who have immigrated to Sweden we recognise that there are difficulties faced in integrating and 
+socialising in a Swedish society. The agenda of the forum we implemented, BeeConnected, is to facilitate integration, 
+interaction and even assistance between Swedes and foreigners. The forum will have guidelines for users to adhere to, 
+and it will also be moderated so that we ensure that users adhere to guidelines. 
+
 This web starter template is based on Spring, PostgreSQL, React, React router and Axios. Check the following links for documentation and guides:
 
 - [Spring](https://spring.io/projects/spring-boot)

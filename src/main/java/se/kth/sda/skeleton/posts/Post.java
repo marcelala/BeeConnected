@@ -1,3 +1,7 @@
+
+
+
+
 package se.kth.sda.skeleton.posts;
 
 import java.util.Date;
@@ -23,7 +27,7 @@ import org.hibernate.annotations.OnDeleteAction;
 import se.kth.sda.skeleton.comments.Comment;
 import se.kth.sda.skeleton.user.User;
 
-// @TODO add Hibernate annotations
+
 @Entity
 public class Post {
     @Id
