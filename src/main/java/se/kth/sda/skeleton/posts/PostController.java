@@ -1,15 +1,4 @@
-/**
- * This class implements the controller functionality for posts
- * <p>
- *  This class outlines the HTTP methods, paths and requests
- *  Persistence is implemented using Hibernate annotations
- *
- *
- * </p>
- * @author Nicholas Hartman, Marcela Felix Fortis and Sujan Varma
- * @version 1.0
- *
- */
+
 package se.kth.sda.skeleton.posts;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +13,20 @@ import se.kth.sda.skeleton.user.UserService;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * this class implements the controller functionality for posts
+ * <p>
+ *  this class outlines the HTTP methods, paths and requests
+ *  persistence is implemented using Hibernate annotations
+ *  only two methods were migrated to the service class due to most methods being short
+ * </p>
+ *
+ * @author Sujan Varma
+ * @author Nicholas Hartman
+ * @author Marcela Fortis Felix
+ * @version 1.0
+ *
+ */
 
 @RequestMapping("/posts")
 @RestController
@@ -36,10 +39,11 @@ public class PostController {
     CommentRepository commentRepository;
 
     /**
+     * postcontroller constructor to initialise required repositories and services
      *
-     * @param postRepository
-     * @param postService
-     * @param userService
+     * @param postRepository list of post table entities
+     * @param postService postservice object for functionality situated in the postservice class
+     * @param userService userservice object to import user data
      */
     @Autowired
     public PostController(PostRepository postRepository, PostService postService, UserService userService) {
@@ -51,8 +55,9 @@ public class PostController {
     // Return all posts.
 
     /**
+     *returns all posts in the post table
      *
-     * @return
+     * @return returns a list of posts
      */
     @GetMapping
     public List<Post> listAllPosts() {
@@ -61,11 +66,12 @@ public class PostController {
     }
 
     /**
+     *return a specific post based on the postId or ResourceNot found if no post is found.
      *
-     * @param id
-     * @return
+     * @param id holds an entered id to identify a specific post
+     * @return  returns a corresponding post and an HTTPs response
      */
-    // Return a specific post based on the postId.
+    //
     @GetMapping("/{id}")
     public ResponseEntity<Post> getPost(@PathVariable Long id) {
         Post post = postRepository.findById(id).orElseThrow(ResourceNotFoundException::new);
@@ -74,11 +80,13 @@ public class PostController {
 
     /**
      *
-     * @param post
-     * @param principal
-     * @return
+     * creates a new post on User given by Logged In User
+     *
+     * @param post  object to hold the entered data to create a new post
+     * @param principal object holding the user info
+     * @return returns the newly created post and HTTPs status
      */
-    // Create a new post on User given by Logged In User
+
     @PostMapping
     public ResponseEntity<Post> createUserPost(@RequestBody Post post, Principal principal) {
         String userName = principal.getName();
@@ -91,12 +99,14 @@ public class PostController {
 
     /**
      *
-     * @param id
-     * @param updatedPost
-     * @param principal
-     * @return
+     * calls the update functionality from the PostService class and passes the params
+     *
+     * @param id holds an entered id to a identify a specific post
+     * @param updatedPost holds the object to replace the table entity being updated
+     * @param principal object holding the user info
+     * @return returns the updated post and HTTPs status
      */
-    // Update the post based on the provided postId
+
     @PutMapping("/{id}")
     public ResponseEntity<Post> updatePost(@PathVariable Long id, @RequestBody Post updatedPost, Principal principal) {
         Post post = postService.updatePost(id, updatedPost, principal);
@@ -105,10 +115,12 @@ public class PostController {
 
     /**
      *
-     * @param id
-     * @param principal
+     * calls the delete functionality from the PostService class and passes the params
+     *
+     * @param id holds an entered id to a identify a specific post
+     * @param principal object holding the user info
      */
-    // Delete the post based on the provided postId.
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deletePost(@PathVariable Long id, Principal principal) {

@@ -14,6 +14,21 @@ import se.kth.sda.skeleton.user.UserService;
 import java.security.Principal;
 import java.util.List;
 
+/**
+ * this class implements the controller functionality for comments
+ * <p>
+ *  this class outlines the HTTP methods, paths and requests
+ *  persistence is implemented using Hibernate annotations
+ * </p>
+ *
+ * @author Nicholas Hartman
+ * @author Sujan Varma
+ * @author Marcela Fortis Felix
+ * @version 1.0
+ *
+ */
+
+
 @RequestMapping("/comments")
 @RestController
 public class CommentController {
@@ -25,6 +40,9 @@ public class CommentController {
 
     @Autowired
 
+    /**
+     * initialises repositories and services for the comment controller functionality
+     */
     public CommentController(CommentRepository commentRepository, PostRepository postRepository,
             UserService userService, CommentService commentService) {
         this.commentRepository = commentRepository;
@@ -33,14 +51,29 @@ public class CommentController {
         this.commentService = commentService;
     }
 
-    // List all comments for a given post
+    /**
+     *
+     * lists all comments for a given post
+     *
+     * @param postId id of the post
+     * @return the comments for the post with the corresponding id
+     */
     @GetMapping("/{postId}")
     public ResponseEntity<List<Comment>> listAllCommentsOnPost(@PathVariable Long postId) {
         Post post = postRepository.findById(postId).orElseThrow(ResourceNotFoundException::new);
         return ResponseEntity.ok(post.getComments());
     }
 
-    // Create a comment on a given post.
+    /**
+     *
+     * creates a comment on a given post
+     *
+     * @param postId id of the post
+     * @param comment object to hold the fields of the comment
+     * @param principal object holding the user info
+     * @return the created comment and HTTPs status
+     */
+    //
     @PostMapping("/{postId}")
     public ResponseEntity<Comment> createComment(@PathVariable Long postId, @RequestBody Comment comment,
             Principal principal) {
@@ -56,7 +89,15 @@ public class CommentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(comment);
     }
 
-    // Update a comment by the given commentId
+    /**
+     *
+     * calls the update functionality from the CommentService class and passes the params
+     *
+     * @param commentId id of the comment to be updated
+     * @param updatedComment object to hold the new state to update the comment with
+     * @param principal object holding the user info
+     * @return
+     */
     @PutMapping("/{commentId}")
     public ResponseEntity<Comment> updateComment(@PathVariable Long commentId, @RequestBody Comment updatedComment,
             Principal principal) {
@@ -64,7 +105,14 @@ public class CommentController {
         return ResponseEntity.ok(comment);
     }
 
-    // Delete a comment by the five commentId
+    /**
+     *
+     * calls the delete functionality from the CommentService class and passes the params
+     *
+     * @param commentId id of the comment to be updated
+     * @param principal object holding the user info
+     */
+
     @DeleteMapping("/{commentId}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteComment(@PathVariable Long commentId, Principal principal) {
